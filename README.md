@@ -29,6 +29,6 @@ to be secure or work at all but I checked it on wireshark before finishing so it
 
 The only errors I know of are within the modules I was using at the time which are made by nueral nine 
 which is the screenshare and voice share modules called vidstream if I had more time I would have made
-these myself but sometimes when pressing the call or screenshare buttons it will start 2 calls or screenshares
+these myself but sometimes when pressing the call or screenshare buttons allot it will start 2 calls or screenshares
 now that I think about it I should have added a short time limit before allowing start of another call or 
 screenshare.
