@@ -2,15 +2,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import sys, os, requests, threading, socket, rsa
 
-#IMPORTANT! You need pillow package for screenshare
+# IMPORTANT! You need pillow package for screenshare
 
 import time as T
 from vidstream import ScreenShareClient, AudioReceiver, AudioSender, StreamingServer
-global Target, publicIp, privateIp, Connected, Hosting , connectingToHost, otherPersonStreaming, fullText, screenShareOn, setText, IpSet, UserNameSet, TargetSet, incomingCall, notJoining, inCall, directory, publicPartner, publicKey, privateKey
-so = socket.socket(socket.AF_INET, socket.SOCK_STREAM)#socket connection 
-hostName = socket.gethostname() #gets host name
-publicIp = requests.get('https://api.ipify.org/').text #gets public ip
-privateIp = socket.gethostbyname(hostName) #gets private ip of host name
+
+global Target, publicIp, privateIp, Connected, Hosting, connectingToHost, otherPersonStreaming, fullText, screenShareOn, setText, IpSet, UserNameSet, TargetSet, incomingCall, notJoining, inCall, directory, publicPartner, publicKey, privateKey
+so = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # socket connection
+hostName = socket.gethostname()  # gets host name
+publicIp = requests.get("https://api.ipify.org/").text  # gets public ip
+privateIp = socket.gethostbyname(hostName)  # gets private ip of host name
 Hosting = False
 connectingToHost = False
 Connected = False
@@ -21,7 +22,7 @@ TargetSet = False
 IpType = ""
 error = False
 PORT = 55555
-fullText = ("C͟H͟A͟T͟")
+fullText = "C͟H͟A͟T͟"
 setText = False
 incomingCall = False
 screenShareOn = False
@@ -34,12 +35,11 @@ publicPartner = None
 Target = ""
 
 
-
-'''
+"""
 
 GUI
 
-'''
+"""
 
 
 ##################################################################################################################################################
@@ -191,11 +191,14 @@ class Ui_Liscord(object):
         Liscord.setFont(font)
         Liscord.setMouseTracking(False)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Pictures/Liscord.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("../Pictures/Liscord.png"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         Liscord.setWindowIcon(icon)
         Liscord.setAutoFillBackground(False)
-        Liscord.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-"")
+        Liscord.setStyleSheet("background-color: rgb(0, 0, 0);\n" "")
         self.centralwidget = QtWidgets.QWidget(Liscord)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -217,15 +220,20 @@ class Ui_Liscord(object):
         self.LiscordTitle.setObjectName("LiscordTitle")
         self.verticalLayout_2.addWidget(self.LiscordTitle)
         self.line = QtWidgets.QFrame(self.widget_6)
-        self.line.setStyleSheet("color:rgb(0, 0, 127);\n"
-"background-color:rgb(0, 0, 127);")
+        self.line.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color:rgb(0, 0, 127);"
+        )
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.verticalLayout_2.addWidget(self.line)
-        spacerItem = QtWidgets.QSpacerItem(258, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            258, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem1)
         self.IPTitle = QtWidgets.QLabel(self.widget_6)
         font = QtGui.QFont()
@@ -240,8 +248,7 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(18)
         self.hostIPBox.setFont(font)
-        self.hostIPBox.setStyleSheet("color: rgb(0, 0, 127);\n"
-"")
+        self.hostIPBox.setStyleSheet("color: rgb(0, 0, 127);\n" "")
         self.hostIPBox.setText("")
         self.hostIPBox.setObjectName("hostIPBox")
         self.verticalLayout_2.addWidget(self.hostIPBox)
@@ -261,8 +268,7 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(18)
         self.targetIPBox.setFont(font)
-        self.targetIPBox.setStyleSheet("color: rgb(0, 0, 127);\n"
-"")
+        self.targetIPBox.setStyleSheet("color: rgb(0, 0, 127);\n" "")
         self.targetIPBox.setInputMask("")
         self.targetIPBox.setText("")
         self.targetIPBox.setObjectName("targetIPBox")
@@ -271,32 +277,33 @@ class Ui_Liscord(object):
         self.pushButton_2.setStyleSheet("background-color: rgb(17, 17, 17);")
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_2.addWidget(self.pushButton_2)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem2)
 
-        self.HostButton = QtWidgets.QPushButton(self.widget_6)###############
+        self.HostButton = QtWidgets.QPushButton(self.widget_6)  ###############
         font = QtGui.QFont()
         self.HostButton.setText("HOST")
         font.setPointSize(21)
         font.setBold(True)
         font.setWeight(75)
         self.HostButton.setFont(font)
-        self.HostButton.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-"color: rgb(0, 0, 125);\n"
-"")
+        self.HostButton.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color: rgb(0, 0, 125);\n" ""
+        )
         self.HostButton.setObjectName("HostButton")
         self.HostButton.setToolTip("Press To Host Connection")
         self.verticalLayout_2.addWidget(self.HostButton)
 
-        palette = QtGui.QPalette() 
+        palette = QtGui.QPalette()
         self.HostButton.setPalette(palette)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         self.HostButton.setPalette(palette)
 
-
-        self.Connect_button = QtWidgets.QPushButton(self.widget_6)###########
+        self.Connect_button = QtWidgets.QPushButton(self.widget_6)  ###########
         font = QtGui.QFont()
         font.setPointSize(21)
         font.setBold(True)
@@ -306,32 +313,37 @@ class Ui_Liscord(object):
         self.Connect_button.setObjectName("Connect_button")
         self.verticalLayout_2.addWidget(self.Connect_button)
 
-
-
-
-
-
-        self.Disconnect = QtWidgets.QPushButton(self.widget_6)##########################
+        self.Disconnect = QtWidgets.QPushButton(
+            self.widget_6
+        )  ##########################
         font = QtGui.QFont()
         font.setPointSize(28)
         self.Disconnect.setFont(font)
-        self.Disconnect.setStyleSheet("color: rgb(140, 0, 0);\n"
-"background-color: rgb(17, 17, 17);\n"
-"")
+        self.Disconnect.setStyleSheet(
+            "color: rgb(140, 0, 0);\n" "background-color: rgb(17, 17, 17);\n" ""
+        )
         self.Disconnect.setObjectName("Disconnect")
         self.verticalLayout_2.addWidget(self.Disconnect)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem3)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem4)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem5)
         self.horizontalLayout_3.addWidget(self.widget_6)
         self.widget_8 = QtWidgets.QWidget(self.centralwidget)
         self.widget_8.setObjectName("widget_8")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_8)
         self.verticalLayout.setObjectName("verticalLayout")
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout.addItem(spacerItem6)
         self.startVoip = QtWidgets.QPushButton(self.widget_8)
         font = QtGui.QFont()
@@ -339,8 +351,9 @@ class Ui_Liscord(object):
         font.setBold(True)
         font.setWeight(75)
         self.startVoip.setFont(font)
-        self.startVoip.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-"color: rgb(0, 0, 127);")
+        self.startVoip.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color: rgb(0, 0, 127);"
+        )
         self.startVoip.setObjectName("startVoip")
         self.verticalLayout.addWidget(self.startVoip)
         self.screenShare = QtWidgets.QPushButton(self.widget_8)
@@ -406,10 +419,9 @@ class Ui_Liscord(object):
         font.setWeight(75)
         self.screenShare.setFont(font)
         self.screenShare.setMouseTracking(False)
-        self.screenShare.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-"color:rgb(0, 0, 127);\n"
-"\n"
-"")
+        self.screenShare.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color:rgb(0, 0, 127);\n" "\n" ""
+        )
         self.screenShare.setAutoExclusive(False)
         self.screenShare.setObjectName("screenShare")
         self.verticalLayout.addWidget(self.screenShare)
@@ -417,12 +429,14 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(37)
         self.helpButton.setFont(font)
-        self.helpButton.setStyleSheet("color: rgb(0, 0, 127);\n"
-"background-color: rgb(17, 17, 17);\n"
-"")
+        self.helpButton.setStyleSheet(
+            "color: rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);\n" ""
+        )
         self.helpButton.setObjectName("helpButton")
         self.verticalLayout.addWidget(self.helpButton)
-        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout.addItem(spacerItem7)
         self.horizontalLayout_3.addWidget(self.widget_8)
         self.widget_3 = QtWidgets.QWidget(self.centralwidget)
@@ -433,8 +447,9 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.timeLabel.setFont(font)
-        self.timeLabel.setStyleSheet("color:rgb(255, 255, 255);\n"
-"background-color: rgb(17, 17, 17);")
+        self.timeLabel.setStyleSheet(
+            "color:rgb(255, 255, 255);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.timeLabel.setText("")
         self.timeLabel.setObjectName("timeLabel")
         self.verticalLayout_4.addWidget(self.timeLabel)
@@ -467,8 +482,9 @@ class Ui_Liscord(object):
         font.setWeight(50)
         font.setStrikeOut(False)
         self.usernameButton.setFont(font)
-        self.usernameButton.setStyleSheet("color:rgb(0, 0, 127);\n"
-"background-color: rgb(17, 17, 17);")
+        self.usernameButton.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.usernameButton.setObjectName("usernameButton")
         self.horizontalLayout_2.addWidget(self.usernameButton)
         self.usernameButton.raise_()
@@ -567,8 +583,9 @@ class Ui_Liscord(object):
         self.enterText.setFont(font)
         self.enterText.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.enterText.setAutoFillBackground(False)
-        self.enterText.setStyleSheet("color:rgb(0, 0, 127);\n"
-"background-color: rgb(17, 17, 17);")
+        self.enterText.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.enterText.setObjectName("enterText")
         self.horizontalLayout.addWidget(self.enterText)
         self.verticalLayout_4.addWidget(self.widget)
@@ -590,749 +607,944 @@ class Ui_Liscord(object):
         self.targetIPBox.setPlaceholderText(_translate("Liscord", "Connect"))
         self.pushButton_2.setToolTip(_translate("Liscord", "Confirm"))
         self.pushButton_2.setText(_translate("Liscord", "CONFIRM"))
-        self.Connect_button.setToolTip(_translate("Liscord", "<html><head/><body><p>Connects to target ip with your ip</p></body></html>"))
+        self.Connect_button.setToolTip(
+            _translate(
+                "Liscord",
+                "<html><head/><body><p>Connects to target ip with your ip</p></body></html>",
+            )
+        )
         self.Connect_button.setText(_translate("Liscord", "Connect"))
         self.Disconnect.setToolTip(_translate("Liscord", "Disconnect from everything"))
         self.Disconnect.setText(_translate("Liscord", "Disconnect"))
-        self.startVoip.setToolTip(_translate("Liscord", "Start a call with other members of the chat"))
+        self.startVoip.setToolTip(
+            _translate("Liscord", "Start a call with other members of the chat")
+        )
         self.startVoip.setText(_translate("Liscord", "Call"))
-        self.screenShare.setToolTip(_translate("Liscord", "<html><head/><body><p>Show your screen to other members of the chat</p></body></html>"))
+        self.screenShare.setToolTip(
+            _translate(
+                "Liscord",
+                "<html><head/><body><p>Show your screen to other members of the chat</p></body></html>",
+            )
+        )
         self.screenShare.setText(_translate("Liscord", "screen share"))
-        self.helpButton.setToolTip(_translate("Liscord", "Click if you dont know what you are doing"))
+        self.helpButton.setToolTip(
+            _translate("Liscord", "Click if you dont know what you are doing")
+        )
         self.helpButton.setText(_translate("Liscord", "Help!"))
         self.USERNAMETitle.setText(_translate("Liscord", "USERNAME"))
         self.usernameButton.setToolTip(_translate("Liscord", "Enter"))
         self.usernameButton.setText(_translate("Liscord", "⏎"))
-        self.chatBox.setHtml(_translate("Liscord", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; text-decoration: underline; color:#ff0000;\">CHAT</span></p></body></html>"))
+        self.chatBox.setHtml(
+            _translate(
+                "Liscord",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600; text-decoration: underline; color:#ff0000;">CHAT</span></p></body></html>',
+            )
+        )
         self.textBox.setPlaceholderText(_translate("Liscord", "Start Chatting!"))
         self.enterText.setToolTip(_translate("Liscord", "Enter"))
         self.enterText.setText(_translate("Liscord", "⏎"))
-##############################################################################################################################################################################################
-        
-        '''
+        ##############################################################################################################################################################################################
+
+        """
         
         buttons
 
-        '''
-        
-        
-        self.helpButton.clicked.connect(self.help)#if Help button pressed
-        self.pushButton_2.clicked.connect(self.targetClicked)#if enter my ip button pressed
-        self.pushButton.clicked.connect(self.ipClicked)#if target ip button pressed
-        self.usernameButton.clicked.connect(self.usernameClicked)#if username button pressed
-        self.Connect_button.clicked.connect(self.connect)#if connect button pressed
-        self.HostButton.clicked.connect(self.Host)#if host button pressed
-        self.enterText.clicked.connect(self.sendButtonClicked)#if enter text button pressed
-        self.Disconnect.clicked.connect(self.disconnect)#if disconnect button pressed
-        self.startVoip.clicked.connect(self.voip)#if call button pressed
-        self.screenShare.clicked.connect(self.screen_Share)#if screen share button pressed
+        """
 
+        self.helpButton.clicked.connect(self.help)  # if Help button pressed
+        self.pushButton_2.clicked.connect(
+            self.targetClicked
+        )  # if enter my ip button pressed
+        self.pushButton.clicked.connect(self.ipClicked)  # if target ip button pressed
+        self.usernameButton.clicked.connect(
+            self.usernameClicked
+        )  # if username button pressed
+        self.Connect_button.clicked.connect(self.connect)  # if connect button pressed
+        self.HostButton.clicked.connect(self.Host)  # if host button pressed
+        self.enterText.clicked.connect(
+            self.sendButtonClicked
+        )  # if enter text button pressed
+        self.Disconnect.clicked.connect(self.disconnect)  # if disconnect button pressed
+        self.startVoip.clicked.connect(self.voip)  # if call button pressed
+        self.screenShare.clicked.connect(
+            self.screen_Share
+        )  # if screen share button pressed
 
-
-    def screen_Share(self):#if screen share button pressed
+    def screen_Share(self):  # if screen share button pressed
         global Connected, screenShareOn, sender, Hosting, Client, connectingToHost, ScreenShareClient, screenShareThread, conn, otherPersonStreaming, audioRecver1, audioSend1, audiorecver2, audioSend2, publicPartner
         if Connected:
-                if otherPersonStreaming:
-                        sender = ScreenShareClient(IP, 9998)
-                else:
-                        sender = ScreenShareClient(IP, 9999)
-                if screenShareOn == False:#if screenShareOn not on
-                        screenShareOn = True
-                        screenshareThread = threading.Thread(target=sender.start_stream)
-                        if Hosting:
-                                conn.send(rsa.encrypt("!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                        elif connectingToHost:
-                                Client.send(rsa.encrypt("!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                        screenshareThread.start()
-                else:
-                        if Hosting:
-                                conn.send(rsa.encrypt("!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                                screenShareOn = False
-                        elif connectingToHost:
-                                Client.send(rsa.encrypt("!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                                screenShareOn = False
+            if otherPersonStreaming:
+                sender = ScreenShareClient(IP, 9998)
+            else:
+                sender = ScreenShareClient(IP, 9999)
+            if screenShareOn == False:  # if screenShareOn not on
+                screenShareOn = True
+                screenshareThread = threading.Thread(target=sender.start_stream)
+                if Hosting:
+                    conn.send(
+                        rsa.encrypt(
+                            "!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
+                elif connectingToHost:
+                    Client.send(
+                        rsa.encrypt(
+                            "!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
+                screenshareThread.start()
+            else:
+                if Hosting:
+                    conn.send(
+                        rsa.encrypt(
+                            "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
+                    screenShareOn = False
+                elif connectingToHost:
+                    Client.send(
+                        rsa.encrypt(
+                            "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
+                    screenShareOn = False
         else:
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("ScreenShare")#ScreenShare menu title
-                msg.setText("You Need To Be Connected To ScreenShare")#ScreenShare window text
-                msg.setIcon(QMessageBox.Critical)#shows ! mark when ScreenShare window opened
-                x = msg.exec_() #activates message box
-                
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("ScreenShare")  # ScreenShare menu title
+            msg.setText(
+                "You Need To Be Connected To ScreenShare"
+            )  # ScreenShare window text
+            msg.setIcon(
+                QMessageBox.Critical
+            )  # shows ! mark when ScreenShare window opened
+            x = msg.exec_()  # activates message box
 
     def voip(self):
         global Connected, Hosting, inCall, publicPartner
         if Connected == False:
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("VOIP")#VOIP menu title
-                msg.setText("You Need To Be Connected To Call Someone")#VOIP window text
-                msg.setIcon(QMessageBox.Critical)#shows ! mark when VOIP window opened
-                x = msg.exec_() #activates message box
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("VOIP")  # VOIP menu title
+            msg.setText("You Need To Be Connected To Call Someone")  # VOIP window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when VOIP window opened
+            x = msg.exec_()  # activates message box
         else:
-                if inCall:
-                        if Hosting:
-                                audioRecver1.stop_server()
-                                audioSend1.stop_stream()
-                        elif connectingToHost:
-                                audioRecver2.stop_server()
-                                audioSend2.stop_stream()
-                        inCall = False
-                else:
-                        if Hosting:
-                                conn.send(rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                        elif connectingToHost:
-                                Client.send(rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-
-
-
+            if inCall:
+                if Hosting:
+                    audioRecver1.stop_server()
+                    audioSend1.stop_stream()
+                elif connectingToHost:
+                    audioRecver2.stop_server()
+                    audioSend2.stop_stream()
+                inCall = False
+            else:
+                if Hosting:
+                    conn.send(
+                        rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner)
+                    )  # send encrypted and encoded text
+                elif connectingToHost:
+                    Client.send(
+                        rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner)
+                    )  # send encrypted and encoded text
 
     def disconnect(self):
         global Connected, conn, Host, fullText, sendButtonClicked, Hosting, connectingToHost, publicPartner
         print("Disconnect pressed")
         if Connected:
-                if Hosting:
-                        conn.send(rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                        conn.shutdown(socket.SHUT_RDWR)
-                        conn.close()
-                        Host.close()
-                        Connected = False
-                        fullText = fullText + "\n You Have Left The Chat"
-                        sendButtonClicked = True
-                        Hosting = False
-                        connectingToHost = False
-                elif connectingToHost:
-                        Client.send(rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                        Client.shutdown(socket.SHUT_RDWR)
-                        Client.close()
-                        Connected = False
-                        fullText = fullText + "\n You Have Left The Chat"
-                        sendButtonClicked = True
-                        Hosting = False
-                        connectingToHost = False
+            if Hosting:
+                conn.send(
+                    rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner)
+                )  # send encrypted and encoded text
+                conn.shutdown(socket.SHUT_RDWR)
+                conn.close()
+                Host.close()
+                Connected = False
+                fullText = fullText + "\n You Have Left The Chat"
+                sendButtonClicked = True
+                Hosting = False
+                connectingToHost = False
+            elif connectingToHost:
+                Client.send(
+                    rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner)
+                )  # send encrypted and encoded text
+                Client.shutdown(socket.SHUT_RDWR)
+                Client.close()
+                Connected = False
+                fullText = fullText + "\n You Have Left The Chat"
+                sendButtonClicked = True
+                Hosting = False
+                connectingToHost = False
 
         else:
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("Disconnect")#Disconnect menu title
-                msg.setText("You Need To Be Connected To Disconnect")#Disconnect window text
-                msg.setIcon(QMessageBox.Critical)#shows ! mark when Disconnect window opened
-                x = msg.exec_() #activates message box
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Disconnect")  # Disconnect menu title
+            msg.setText(
+                "You Need To Be Connected To Disconnect"
+            )  # Disconnect window text
+            msg.setIcon(
+                QMessageBox.Critical
+            )  # shows ! mark when Disconnect window opened
+            x = msg.exec_()  # activates message box
 
     def updateChatBox(self):
         global sendButtonClicked, incomingCall, Hosting, connectingToHost, notJoining, inCall, audioRecver2, audioSend2, publicPartner
         sendButtonClicked = False
         while True:
-                QtCore.QCoreApplication.processEvents()#so gui doesnt freeze
-                if sendButtonClicked:
-                        print("updated chat box")
-                        self.chatBox.setText(fullText)
-                        sendButtonClicked = False
-                elif incomingCall:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("INCOMING CALL!")#menu title
-                        msg.setText("Do You Want To Join The Call?")#window text
-                        msg.setIcon(QMessageBox.Information)#shows information mark when window opened
-                        msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
-                        x = msg.exec_() #activates message box 
-                        if x == QMessageBox.Ok:
-                                if Hosting:
-                                        conn.send(rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                                        audioRecver2 = AudioReceiver(IP, 15568)########################################################################################
-                                        audiorecverThread2 = threading.Thread(target=audioRecver2.start_server)
-                                        audioSend2 = AudioSender(IP, 15567)
-                                        audioSendThread2 = threading.Thread(target=audioSend2.start_stream)
-                                        audiorecverThread2.start()
-                                        audioSendThread2.start()
-                                        inCall = True
-                                elif connectingToHost:
-                                        Client.send(rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner))#send encrypted and encoded text
-                                        audioRecver2 = AudioReceiver(IP, 15568)
-                                        audiorecverThread2 = threading.Thread(target=audioRecver2.start_server)
-                                        audioSend2 = AudioSender(IP, 15567)
-                                        audioSendThread2 = threading.Thread(target=audioSend2.start_stream)
-                                        audiorecverThread2.start()
-                                        audioSendThread2.start()
-                                        inCall = True
-                        elif x == QMessageBox.Cancel:
-                                if Hosting:
-                                        conn.send(rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner))
-                                elif connectingToHost:
-                                        Client.send(rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner))
-                        incomingCall = False
-                elif notJoining:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Call")#menu title
-                        msg.setText("The Other Person Refused The Call ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #
-                        notJoining = False
+            QtCore.QCoreApplication.processEvents()  # so gui doesnt freeze
+            if sendButtonClicked:
+                print("updated chat box")
+                self.chatBox.setText(fullText)
+                sendButtonClicked = False
+            elif incomingCall:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("INCOMING CALL!")  # menu title
+                msg.setText("Do You Want To Join The Call?")  # window text
+                msg.setIcon(
+                    QMessageBox.Information
+                )  # shows information mark when window opened
+                msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+                x = msg.exec_()  # activates message box
+                if x == QMessageBox.Ok:
+                    if Hosting:
+                        conn.send(
+                            rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner)
+                        )  # send encrypted and encoded text
+                        audioRecver2 = AudioReceiver(
+                            IP, 15568
+                        )  ########################################################################################
+                        audiorecverThread2 = threading.Thread(
+                            target=audioRecver2.start_server
+                        )
+                        audioSend2 = AudioSender(IP, 15567)
+                        audioSendThread2 = threading.Thread(
+                            target=audioSend2.start_stream
+                        )
+                        audiorecverThread2.start()
+                        audioSendThread2.start()
+                        inCall = True
+                    elif connectingToHost:
+                        Client.send(
+                            rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner)
+                        )  # send encrypted and encoded text
+                        audioRecver2 = AudioReceiver(IP, 15568)
+                        audiorecverThread2 = threading.Thread(
+                            target=audioRecver2.start_server
+                        )
+                        audioSend2 = AudioSender(IP, 15567)
+                        audioSendThread2 = threading.Thread(
+                            target=audioSend2.start_stream
+                        )
+                        audiorecverThread2.start()
+                        audioSendThread2.start()
+                        inCall = True
+                elif x == QMessageBox.Cancel:
+                    if Hosting:
+                        conn.send(
+                            rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner)
+                        )
+                    elif connectingToHost:
+                        Client.send(
+                            rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner)
+                        )
+                incomingCall = False
+            elif notJoining:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Call")  # menu title
+                msg.setText("The Other Person Refused The Call ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  #
+                notJoining = False
 
-                else:
-                        pass
-    def Host(self):##################################################################################
+            else:
+                pass
+
+    def Host(
+        self,
+    ):  ##################################################################################
         global Connected, UserNameSet, IpSet, TargetSet, Host, privateKey, publicPartner
-        if Connected:#if connected
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("Host")#Host menu title
-                msg.setText("You Are Already Connected To Someone")#Host window text
-                msg.setIcon(QMessageBox.Critical)#shows ! mark when Host window opened
-                x = msg.exec_() #activates message box
-        else:#if not connected
-                if UserNameSet == False:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#menu title
-                        msg.setText("You Need To Add your Username ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box  
-                elif IpSet == False:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Your IP")#menu title
-                        msg.setText("You Need To Add your IP ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box 
-                else:
-                        Host = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                        try:
-                                Host.bind((IP,PORT))
-                                hostIpError = False
-                        except:
-                                hostIpError = True
-                                
+        if Connected:  # if connected
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Host")  # Host menu title
+            msg.setText("You Are Already Connected To Someone")  # Host window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when Host window opened
+            x = msg.exec_()  # activates message box
+        else:  # if not connected
+            if UserNameSet == False:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Username")  # menu title
+                msg.setText("You Need To Add your Username ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  # activates message box
+            elif IpSet == False:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Your IP")  # menu title
+                msg.setText("You Need To Add your IP ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  # activates message box
+            else:
+                Host = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                try:
+                    Host.bind((IP, PORT))
+                    hostIpError = False
+                except:
+                    hostIpError = True
 
-                        if hostIpError:
-                                msg = QMessageBox() #makes message box
-                                msg.setWindowTitle("Host IP")#menu title
-                                msg.setText("Your Host IP Is Invalid ")#window text
-                                msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                                x = msg.exec_() #activates message box 
-                        else:
-                                Host.listen(1)#listens for anyone trying to connect
-                                print("Waiting for connection on port " + str(PORT))
-                                global conn, addr, ClientUsername, fullText, Hosting
-                                Host.settimeout(1)
-                                accepting = True
-                                hostAcceptingCount = 0
-                                while accepting:
-                                        try:
-                                                conn, addr = Host.accept()#accepts whoever trys to connect
-                                                print("connection accepted")
-                                                hostAcceptingError = False#no error
-                                                accepting = False#stop looping
-                                        except:
-                                                QtCore.QCoreApplication.processEvents()#stops gui from freezing
-                                                hostAcceptingCount = hostAcceptingCount + 1
-                                                if hostAcceptingCount == 30:
-                                                        hostAcceptingError = True#error
-                                                        accepting = False#stop looping
-                                
-                                if hostAcceptingError:
-                                        msg = QMessageBox() #makes message box
-                                        msg.setWindowTitle("Host Connection")#menu title
-                                        msg.setText("No One Connected To You So We Closed The Connection ")#window text
-                                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                                        x = msg.exec_() #activates message box 
-                                else:
-                                        T.sleep(1)
-                                        conn.send(publicKey.save_pkcs1("PEM"))
-                                        publicPartner = rsa.PublicKey.load_pkcs1(conn.recv(1024))
-                                        ClientUsername = rsa.decrypt(conn.recv(1024), privateKey).decode("utf-8")
-                                        T.sleep(0.5)
-                                        conn.send(rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner))
-                                        print("connected with " + str(ClientUsername))
-                                        fullText = str(fullText) + "\nCONNECTED WITH " + str(ClientUsername)
-                                        self.chatBox.setText(str(fullText))
-                                        Connected = True
-                                        Hosting = True
-                                        t1 = threading.Thread(target=self.receiving1)
-                                        t2 = threading.Thread(target=self.sending1)
-                                        t1.daemon = True
-                                        t2.daemon = True
-                                        t1.start()
-                                        t2.start()
-                                        self.updateChatBox()    
+                if hostIpError:
+                    msg = QMessageBox()  # makes message box
+                    msg.setWindowTitle("Host IP")  # menu title
+                    msg.setText("Your Host IP Is Invalid ")  # window text
+                    msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                    x = msg.exec_()  # activates message box
+                else:
+                    Host.listen(1)  # listens for anyone trying to connect
+                    print("Waiting for connection on port " + str(PORT))
+                    global conn, addr, ClientUsername, fullText, Hosting
+                    Host.settimeout(1)
+                    accepting = True
+                    hostAcceptingCount = 0
+                    while accepting:
+                        try:
+                            (
+                                conn,
+                                addr,
+                            ) = Host.accept()  # accepts whoever trys to connect
+                            print("connection accepted")
+                            hostAcceptingError = False  # no error
+                            accepting = False  # stop looping
+                        except:
+                            QtCore.QCoreApplication.processEvents()  # stops gui from freezing
+                            hostAcceptingCount = hostAcceptingCount + 1
+                            if hostAcceptingCount == 30:
+                                hostAcceptingError = True  # error
+                                accepting = False  # stop looping
+
+                    if hostAcceptingError:
+                        msg = QMessageBox()  # makes message box
+                        msg.setWindowTitle("Host Connection")  # menu title
+                        msg.setText(
+                            "No One Connected To You So We Closed The Connection "
+                        )  # window text
+                        msg.setIcon(
+                            QMessageBox.Critical
+                        )  # shows ! mark when window opened
+                        x = msg.exec_()  # activates message box
+                    else:
+                        T.sleep(1)
+                        conn.send(publicKey.save_pkcs1("PEM"))
+                        publicPartner = rsa.PublicKey.load_pkcs1(conn.recv(1024))
+                        ClientUsername = rsa.decrypt(
+                            conn.recv(1024), privateKey
+                        ).decode("utf-8")
+                        T.sleep(0.5)
+                        conn.send(
+                            rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner)
+                        )
+                        print("connected with " + str(ClientUsername))
+                        fullText = (
+                            str(fullText) + "\nCONNECTED WITH " + str(ClientUsername)
+                        )
+                        self.chatBox.setText(str(fullText))
+                        Connected = True
+                        Hosting = True
+                        t1 = threading.Thread(target=self.receiving1)
+                        t2 = threading.Thread(target=self.sending1)
+                        t1.daemon = True
+                        t2.daemon = True
+                        t1.start()
+                        t2.start()
+                        self.updateChatBox()
 
     def receiving1(self):
-                global fullText, ClientUsername, sendButtonClicked, conn, receiver, privateKey, otherPersonStreaming, screenShareOn, Connected, Hosting, connectingToHost, incomingCall, notJoining, inCall, audioRecver1, audioSend1
-                sendButtonClicked = False
-                while True:
+        global fullText, ClientUsername, sendButtonClicked, conn, receiver, privateKey, otherPersonStreaming, screenShareOn, Connected, Hosting, connectingToHost, incomingCall, notJoining, inCall, audioRecver1, audioSend1
+        sendButtonClicked = False
+        while True:
+            try:
+                if Connected == False:
+                    break
+                else:
+                    message = rsa.decrypt(conn.recv(1024), privateKey).decode(
+                        "utf-8"
+                    )  # receive message decrpt and decode
+                    if (
+                        message == "!LEAVINGTHECHAT!"
+                    ):  # if leaving chat message received
+                        fullText = (
+                            str(fullText)
+                            + "\n"
+                            + str(ClientUsername)
+                            + " Has Left The Chat"
+                        )
+                        print(str(fullText))
+                        Hosting = False
+                        connectingToHost = False
+                        Connected = False
+                        sendButtonClicked = True  # set text
+                        conn.shutdown(
+                            socket.SHUT_RDWR
+                        )  # shutdown read and write on the socket
+                        conn.close()  # close socket
+                    elif (
+                        message == "!STOP_SHARE_SCREEN!"
+                    ):  # if stop shar screen message received
+                        fullText = str(fullText) + "\nSTOPING SHARESCREEN"
+                        sendButtonClicked = True  # set text
                         try:
-                                if Connected == False:
-                                        break
-                                else:
-                                        message = rsa.decrypt(conn.recv(1024), privateKey).decode("utf-8")# receive message decrpt and decode
-                                        if message == "!LEAVINGTHECHAT!":#if leaving chat message received
-                                                fullText = str(fullText) + "\n" + str(ClientUsername) + " Has Left The Chat"
-                                                print(str(fullText))
-                                                Hosting = False
-                                                connectingToHost = False
-                                                Connected = False
-                                                sendButtonClicked = True#set text
-                                                conn.shutdown(socket.SHUT_RDWR)#shutdown read and write on the socket
-                                                conn.close()#close socket
-                                        elif message == "!STOP_SHARE_SCREEN!":#if stop shar screen message received
-                                                fullText = str(fullText) + "\nSTOPING SHARESCREEN"
-                                                sendButtonClicked = True #set text
-                                                try:
-                                                        receiver.stop_server()#stop screen share
-                                                        otherPersonStreaming = False
-                                                except:
-                                                        pass
-                                        elif message == "!STARTING_SCREEN_SHARE!":
-                                                if screenShareOn:
-                                                        receiver = StreamingServer(IP, 9998)
-                                                        print("starting port 9998 " + str(otherPersonStreaming))
-                                                else:
-                                                        receiver = StreamingServer(IP, 9999)
-                                                        print("starting port 9999")
-                                                screenShareThread = threading.Thread(target=receiver.start_server)
-                                                screenShareThread.start()
-                                                otherPersonStreaming = True
-                                        elif message == "!INCOMING_CALL!":
-                                                incomingCall = True
-                                        elif message == "!NOT_JOINING!":
-                                                notJoining = True
-                                        elif message == "!JOINING_CALL!":
-                                                audioRecver1 = AudioReceiver(IP, 15567)
-                                                audiorecverThread1 = threading.Thread(target=audioRecver1.start_server)
-                                                audioSend1 = AudioSender(IP, 15568)
-                                                audioSendThread1 = threading.Thread(target=audioSend1.start_stream)
-                                                audiorecverThread1.start()
-                                                audioSendThread1.start()
-                                                inCall = True
-                                        else:
-                                                fullText = str(fullText) + "\n" + str(ClientUsername) + "->" + str(message)
-                                                print("received message setting text box")
-                                                sendButtonClicked = True
+                            receiver.stop_server()  # stop screen share
+                            otherPersonStreaming = False
                         except:
-                                pass
-    def sending1(self):
-                global sendButtonClicked2, fullText, conn, Connected, publicPartner
-                sendButtonClicked2 = False
-                while True:
-                        if Connected == False:
-                                break
+                            pass
+                    elif message == "!STARTING_SCREEN_SHARE!":
+                        if screenShareOn:
+                            receiver = StreamingServer(IP, 9998)
+                            print("starting port 9998 " + str(otherPersonStreaming))
                         else:
-                                if sendButtonClicked2:
-                                        message = str(self.textBox.text())#get message from text box
-                                        print("sending message")
-                                        conn.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
-                                        fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
-                                        print("setting text")
-                                        sendButtonClicked2 = False
-                                else:
-                                        pass
+                            receiver = StreamingServer(IP, 9999)
+                            print("starting port 9999")
+                        screenShareThread = threading.Thread(
+                            target=receiver.start_server
+                        )
+                        screenShareThread.start()
+                        otherPersonStreaming = True
+                    elif message == "!INCOMING_CALL!":
+                        incomingCall = True
+                    elif message == "!NOT_JOINING!":
+                        notJoining = True
+                    elif message == "!JOINING_CALL!":
+                        audioRecver1 = AudioReceiver(IP, 15567)
+                        audiorecverThread1 = threading.Thread(
+                            target=audioRecver1.start_server
+                        )
+                        audioSend1 = AudioSender(IP, 15568)
+                        audioSendThread1 = threading.Thread(
+                            target=audioSend1.start_stream
+                        )
+                        audiorecverThread1.start()
+                        audioSendThread1.start()
+                        inCall = True
+                    else:
+                        fullText = (
+                            str(fullText)
+                            + "\n"
+                            + str(ClientUsername)
+                            + "->"
+                            + str(message)
+                        )
+                        print("received message setting text box")
+                        sendButtonClicked = True
+            except:
+                pass
 
-                            
+    def sending1(self):
+        global sendButtonClicked2, fullText, conn, Connected, publicPartner
+        sendButtonClicked2 = False
+        while True:
+            if Connected == False:
+                break
+            else:
+                if sendButtonClicked2:
+                    message = str(self.textBox.text())  # get message from text box
+                    print("sending message")
+                    conn.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
+                    fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
+                    print("setting text")
+                    sendButtonClicked2 = False
+                else:
+                    pass
+
     def sendButtonClicked(self):
-        
         print("send button clicked")
         global sendButtonClicked, sendButtonClicked2
         sendButtonClicked = True
         sendButtonClicked2 = True
         T.sleep(0.3)
-        self.textBox.setText("")#set textbox back to blank
+        self.textBox.setText("")  # set textbox back to blank
 
     def usernameClicked(self):
-                #get username from username box
-                global myUserName
-                myUserName = self.usernameBox.text()
-                print("USERNAME = " + "(" + str(myUserName) + ")")
-                userNameLength = len(myUserName)
-                if userNameLength > 12 or userNameLength <3:
-                        myUserName = ""
-                        global UserNameSet
-                        UserNameSet = False
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#help menu title
-                        msg.setText("UserName cant be less than 3 characters or more than 12 characters")#help window text
-                        msg.setIcon(QMessageBox.Critical)#shows question mark when help window opened
-                        x = msg.exec_() #activates message box
-                #getting out invisible letters
-                elif 'ㅤ' in myUserName or '	' in myUserName or ' ' in myUserName or ' ' in myUserName or '͏͏­­­­­؜­' in myUserName or 'ᅟ' in myUserName or 'ᅟ' in myUserName or 'ᅠ' in myUserName or '឵᠎᠎ ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or '‎​​‌' in myUserName or '‏' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or '　⁯⁭⁮⁣' in myUserName or '　' in myUserName or '⠀' in myUserName or 'ㅤ' in myUserName or '﻿' in myUserName or 'ﾠ' in myUserName or '𝅙' in myUserName:
-                        myUserName = ""
-                        UserNameSet = False
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#menu title
-                        msg.setText("NO invisible characters allowed")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box
-                elif " " in myUserName:
-                        myUserName = ""
-                        UserNameSet = False
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#menu title
-                        msg.setText("NO spaces allowed")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! when help window opened
-                        x = msg.exec_() #activates message box
-                elif myUserName == "":
-                        UserNameSet = False
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#menu title
-                        msg.setText("You must have a UserName")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                        x = msg.exec_() #activates message box
-                else:
-                        UserNameSet = True
-                        print(UserNameSet)
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#help menu title
-                        msg.setText("UserName set as " + str(myUserName))#help window text
-                        msg.setIcon(QMessageBox.Information)#shows question mark when help window opened
-                        x = msg.exec_() #activates message box
-                        return myUserName, UserNameSet
-                        
-                return myUserName, UserNameSet
+        # get username from username box
+        global myUserName
+        myUserName = self.usernameBox.text()
+        print("USERNAME = " + "(" + str(myUserName) + ")")
+        userNameLength = len(myUserName)
+        if userNameLength > 12 or userNameLength < 3:
+            myUserName = ""
+            global UserNameSet
+            UserNameSet = False
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Username")  # help menu title
+            msg.setText(
+                "UserName cant be less than 3 characters or more than 12 characters"
+            )  # help window text
+            msg.setIcon(
+                QMessageBox.Critical
+            )  # shows question mark when help window opened
+            x = msg.exec_()  # activates message box
+        # getting out invisible letters
+        elif (
+            "ㅤ" in myUserName
+            or "	" in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "͏͏­­­­­؜­" in myUserName
+            or "ᅟ" in myUserName
+            or "ᅟ" in myUserName
+            or "ᅠ" in myUserName
+            or "឵᠎᠎ " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "‎​​‌" in myUserName
+            or "‏" in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "　⁯⁭⁮⁣" in myUserName
+            or "　" in myUserName
+            or "⠀" in myUserName
+            or "ㅤ" in myUserName
+            or "﻿" in myUserName
+            or "ﾠ" in myUserName
+            or "𝅙" in myUserName
+        ):
+            myUserName = ""
+            UserNameSet = False
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Username")  # menu title
+            msg.setText("NO invisible characters allowed")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+            x = msg.exec_()  # activates message box
+        elif " " in myUserName:
+            myUserName = ""
+            UserNameSet = False
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Username")  # menu title
+            msg.setText("NO spaces allowed")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! when help window opened
+            x = msg.exec_()  # activates message box
+        elif myUserName == "":
+            UserNameSet = False
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Username")  # menu title
+            msg.setText("You must have a UserName")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when help window opened
+            x = msg.exec_()  # activates message box
+        else:
+            UserNameSet = True
+            print(UserNameSet)
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Username")  # help menu title
+            msg.setText("UserName set as " + str(myUserName))  # help window text
+            msg.setIcon(
+                QMessageBox.Information
+            )  # shows question mark when help window opened
+            x = msg.exec_()  # activates message box
+            return myUserName, UserNameSet
+
+        return myUserName, UserNameSet
 
     def targetClicked(self):
-                #get ip from target box
+        # get ip from target box
 
-                error = False
-                global Target
-                Target = self.targetIPBox.text()
-                if " " in Target:#if space in ip
-                        Target = "" 
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Target")#menu title
-                        msg.setText("There is a space inside your Target IP")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                        x = msg.exec_() #activates message box
-                        global TargetSet
-                        TargetSet = False
+        error = False
+        global Target
+        Target = self.targetIPBox.text()
+        if " " in Target:  # if space in ip
+            Target = ""
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Target")  # menu title
+            msg.setText("There is a space inside your Target IP")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when help window opened
+            x = msg.exec_()  # activates message box
+            global TargetSet
+            TargetSet = False
 
-                elif Target == "":
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Target")#menu title
-                        msg.setText("You must add Your Target IP")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                        x = msg.exec_() #activates message box
-                        TargetSet = False
-                else:
-                        TargetType = ""
-                        if "." in Target:
-                                intcheck = Target.split(".")
-                                if " " in intcheck:
-                                        intcheck.remove(" ")
-                                if "" in intcheck:
-                                        intcheck.remove("")
-                                a = len(intcheck)
-                                num = 0
-                                chekingInt = True
-                                while chekingInt:
-                                        error = False
-                                        number = intcheck[num]
-                                        try:
-                                                int(number)
-                                                if num == a - 1:
-                                                        chekingInt = False
-                                                        TargetType = "Ipv4"
-                                                        print(TargetType)
-                                                else:
-                                                        num = num + 1
-                                        except:
-                                                chekingInt = False
-                                                print("Target invalid")
-                                                msg = QMessageBox() #makes message box
-                                                msg.setWindowTitle("Target")#menu title
-                                                msg.setText("Invalid Target ipv4 Must be numbers only no letters")#window text
-                                                msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                                                x = msg.exec_() #activates message box
-                                                error = True
+        elif Target == "":
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Target")  # menu title
+            msg.setText("You must add Your Target IP")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when help window opened
+            x = msg.exec_()  # activates message box
+            TargetSet = False
+        else:
+            TargetType = ""
+            if "." in Target:
+                intcheck = Target.split(".")
+                if " " in intcheck:
+                    intcheck.remove(" ")
+                if "" in intcheck:
+                    intcheck.remove("")
+                a = len(intcheck)
+                num = 0
+                chekingInt = True
+                while chekingInt:
+                    error = False
+                    number = intcheck[num]
+                    try:
+                        int(number)
+                        if num == a - 1:
+                            chekingInt = False
+                            TargetType = "Ipv4"
+                            print(TargetType)
+                        else:
+                            num = num + 1
+                    except:
+                        chekingInt = False
+                        print("Target invalid")
+                        msg = QMessageBox()  # makes message box
+                        msg.setWindowTitle("Target")  # menu title
+                        msg.setText(
+                            "Invalid Target ipv4 Must be numbers only no letters"
+                        )  # window text
+                        msg.setIcon(
+                            QMessageBox.Critical
+                        )  # shows ! mark when help window opened
+                        x = msg.exec_()  # activates message box
+                        error = True
 
-                                
-                        if ":" in Target and TargetType == "" and error == False:
-                                TargetType = "Ipv6"
-                        if TargetType == "" and error == False:
-                                Target = ""
-                                print("Target invalid")
-                                msg = QMessageBox() #makes message box
-                                msg.setWindowTitle("Target")#menu title
-                                msg.setText("Invalid Target")#window text
-                                msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                                x = msg.exec_() #activates message box
-                        elif error == False:
-                                print("Target IP = " + "(" + str(Target) + ") IP type = " + str(TargetType))
-                                msg = QMessageBox() #makes message box
-                                msg.setWindowTitle("Target")#menu title
-                                msg.setText("Your Target IP is " + "(" + str(Target) + ") IP type = " + str(TargetType))#window text
-                                msg.setIcon(QMessageBox.Information)#shows ! mark when help window opened
-                                x = msg.exec_() #activates message box
-                                TargetSet = True
-                                return TargetType, TargetSet
+            if ":" in Target and TargetType == "" and error == False:
+                TargetType = "Ipv6"
+            if TargetType == "" and error == False:
+                Target = ""
+                print("Target invalid")
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Target")  # menu title
+                msg.setText("Invalid Target")  # window text
+                msg.setIcon(
+                    QMessageBox.Critical
+                )  # shows ! mark when help window opened
+                x = msg.exec_()  # activates message box
+            elif error == False:
+                print(
+                    "Target IP = "
+                    + "("
+                    + str(Target)
+                    + ") IP type = "
+                    + str(TargetType)
+                )
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Target")  # menu title
+                msg.setText(
+                    "Your Target IP is "
+                    + "("
+                    + str(Target)
+                    + ") IP type = "
+                    + str(TargetType)
+                )  # window text
+                msg.setIcon(
+                    QMessageBox.Information
+                )  # shows ! mark when help window opened
+                x = msg.exec_()  # activates message box
+                TargetSet = True
+                return TargetType, TargetSet
 
-                return Target
-
+        return Target
 
     def help(self):
-                #display help message
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("Help Menu")#help menu title
-                msg.setText("1.Enter your username and click enter\n2.Set your ip for host and your ip and target IP to connect to a host (works on both on network and off network for connecting off network use the other computers public IP address and to host use private ip) you can get private ip from typing ipconfig in cmd and public from searching on google 'What is my ip' \n3.Press host to host a chat and connect to connect to a host\n4.Once connected you can use the chat, voice call and screenshare\nYou can hover over buttons to get more info\nIf the program breaks just restart it- normally breaks when screensharing or calling more than once")#help window text
-                msg.setIcon(QMessageBox.Question)#shows question mark when help window opened
-                x = msg.exec_() #activates message box
+        # display help message
+        msg = QMessageBox()  # makes message box
+        msg.setWindowTitle("Help Menu")  # help menu title
+        msg.setText(
+            "1.Enter your username and click enter\n2.Set your ip for host and your ip and target IP to connect to a host (works on both on network and off network for connecting off network use the other computers public IP address and to host use private ip) you can get private ip from typing ipconfig in cmd and public from searching on google 'What is my ip' \n3.Press host to host a chat and connect to connect to a host\n4.Once connected you can use the chat, voice call and screenshare\nYou can hover over buttons to get more info\nIf the program breaks just restart it- normally breaks when screensharing or calling more than once"
+        )  # help window text
+        msg.setIcon(QMessageBox.Question)  # shows question mark when help window opened
+        x = msg.exec_()  # activates message box
 
     def ipClicked(self):
-                #if confirm ip clicked
-                global IP
-                IP = self.hostIPBox.text()
-                error2 = False
-        
-                if " " in IP:#if space in ip
-                        IP = "" 
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("IP")#menu title
-                        msg.setText("There is a space inside your IP")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                        x = msg.exec_() #activates message box
-                        global IpSet
-                        IpSet = False
-                elif IP == "":
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("IP")#menu title
-                        msg.setText("You must add Your IP")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                        x = msg.exec_() #activates message box
-                        IpSet = False
+        # if confirm ip clicked
+        global IP
+        IP = self.hostIPBox.text()
+        error2 = False
 
-                else:
-                        IpType = ""
-                        if "." in IP:#checks for Ipv4
-                                intcheck = IP.split(".")
-                                if " " in intcheck:
-                                        intcheck.remove(" ")
-                                if "" in intcheck:
-                                        intcheck.remove("")
-                                a = len(intcheck)
-                                num = 0
-                                chekingInt = True
-                                while chekingInt:#checks for int
-                                        error2 = False
-                                        number = intcheck[num]
-                                        try:
-                                                int(number)
-                                                if num == a - 1:
-                                                        chekingInt = False
-                                                        IpType = "Ipv4"
-                                                        print(IpType)
-                                                else:
-                                                        num = num + 1
-                                        except:
-                                                chekingInt = False
-                                                print("Your IP is invalid")
-                                                msg = QMessageBox() #makes message box
-                                                msg.setWindowTitle("Target")#menu title
-                                                msg.setText("Invalid IP Ipv4 Must be numbers only no letters")#window text
-                                                msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                                                x = msg.exec_() #activates message box
-                                                error2 = True #sets it as error so it skips the rest of the function
+        if " " in IP:  # if space in ip
+            IP = ""
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("IP")  # menu title
+            msg.setText("There is a space inside your IP")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when help window opened
+            x = msg.exec_()  # activates message box
+            global IpSet
+            IpSet = False
+        elif IP == "":
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("IP")  # menu title
+            msg.setText("You must add Your IP")  # window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when help window opened
+            x = msg.exec_()  # activates message box
+            IpSet = False
 
-                                
-                        if ":" in IP and IpType == "" and error2 == False:
-                                IpType = "Ipv6"
-                        if IpType == "" and error2 == False:
-                                IP = ""
-                                print("target invalid")
-                                msg = QMessageBox() #makes message box
-                                msg.setWindowTitle("Your IP")#menu title
-                                msg.setText("Invalid IP")#window text
-                                msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
-                                x = msg.exec_() #activates message box
-                        elif error2 == False: 
-                                print("Your IP = " + "(" + str(IP) + ") IP type = " + str(IpType))
-                                msg = QMessageBox() #makes message box
-                                msg.setWindowTitle("IP")#menu title
-                                msg.setText("Your ip is " + "(" + str(IP) + ")")#window text
-                                msg.setIcon(QMessageBox.Information)#shows ! mark when help window opened
-                                x = msg.exec_() #activates message box
-                                IpSet = True
-                                return IpType, IP, IpSet
-                return IP        
+        else:
+            IpType = ""
+            if "." in IP:  # checks for Ipv4
+                intcheck = IP.split(".")
+                if " " in intcheck:
+                    intcheck.remove(" ")
+                if "" in intcheck:
+                    intcheck.remove("")
+                a = len(intcheck)
+                num = 0
+                chekingInt = True
+                while chekingInt:  # checks for int
+                    error2 = False
+                    number = intcheck[num]
+                    try:
+                        int(number)
+                        if num == a - 1:
+                            chekingInt = False
+                            IpType = "Ipv4"
+                            print(IpType)
+                        else:
+                            num = num + 1
+                    except:
+                        chekingInt = False
+                        print("Your IP is invalid")
+                        msg = QMessageBox()  # makes message box
+                        msg.setWindowTitle("Target")  # menu title
+                        msg.setText(
+                            "Invalid IP Ipv4 Must be numbers only no letters"
+                        )  # window text
+                        msg.setIcon(
+                            QMessageBox.Critical
+                        )  # shows ! mark when help window opened
+                        x = msg.exec_()  # activates message box
+                        error2 = True  # sets it as error so it skips the rest of the function
 
+            if ":" in IP and IpType == "" and error2 == False:
+                IpType = "Ipv6"
+            if IpType == "" and error2 == False:
+                IP = ""
+                print("target invalid")
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Your IP")  # menu title
+                msg.setText("Invalid IP")  # window text
+                msg.setIcon(
+                    QMessageBox.Critical
+                )  # shows ! mark when help window opened
+                x = msg.exec_()  # activates message box
+            elif error2 == False:
+                print("Your IP = " + "(" + str(IP) + ") IP type = " + str(IpType))
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("IP")  # menu title
+                msg.setText("Your ip is " + "(" + str(IP) + ")")  # window text
+                msg.setIcon(
+                    QMessageBox.Information
+                )  # shows ! mark when help window opened
+                x = msg.exec_()  # activates message box
+                IpSet = True
+                return IpType, IP, IpSet
+        return IP
 
-        
-
-    
-
-
-
-
-
-
-
-
-
-    def connect(self):##############################################################################################################################################
-        #try to connect to a host
+    def connect(
+        self,
+    ):  ##############################################################################################################################################
+        # try to connect to a host
         global Connected, IpSet, TargetSet, UserNameSet, privateKey, publicPartner, Target
         if Connected:
-                msg = QMessageBox() #makes message box
-                msg.setWindowTitle("Connect")#Host menu title
-                msg.setText("You Are Already Connected To Someone")#Host window text
-                msg.setIcon(QMessageBox.Critical)#shows ! mark when Host window opened
-                x = msg.exec_() #activates message box
+            msg = QMessageBox()  # makes message box
+            msg.setWindowTitle("Connect")  # Host menu title
+            msg.setText("You Are Already Connected To Someone")  # Host window text
+            msg.setIcon(QMessageBox.Critical)  # shows ! mark when Host window opened
+            x = msg.exec_()  # activates message box
         else:
-                if UserNameSet == False:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Username")#menu title
-                        msg.setText("You Need To Add your Username ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box  
-                elif IpSet == False:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Your IP")#menu title
-                        msg.setText("You Need To Add your IP ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box 
-                elif TargetSet == False:
-                        msg = QMessageBox() #makes message box
-                        msg.setWindowTitle("Target IP")#menu title
-                        msg.setText("You Need To Add your Target IP ")#window text
-                        msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                        x = msg.exec_() #activates message box 
-                else:
-                        print("Connecting To " + str(Target))
-                        global Client, HostUsername, fullText, connectingToHost, ipCount
-                        Client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                        connecting = True
-                        ipCount = 0
-                        while connecting:
-                                try:
-                                        Client.connect((Target,PORT))#connect to ip on port 
-                                        print("connected")
-                                        connecting = False
-                                        connectionError = False
-                                except:
-                                        QtCore.QCoreApplication.processEvents()#so gui doesnt crash
-                                        print("Cant Connect")
-                                        ipCount = ipCount + 1
-                                        if ipCount == 5:
-                                                msg = QMessageBox() #makes message box
-                                                msg.setWindowTitle("Connect")#menu title
-                                                msg.setText("Cant connect to " + str(Target))#window text
-                                                msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
-                                                x = msg.exec_() #activates message box
-                                                connectionError = True
-                                                connecting = False
-                                        else:
-                                                T.sleep(2)
-                        if connectionError:
-                                connectionError = False
+            if UserNameSet == False:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Username")  # menu title
+                msg.setText("You Need To Add your Username ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  # activates message box
+            elif IpSet == False:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Your IP")  # menu title
+                msg.setText("You Need To Add your IP ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  # activates message box
+            elif TargetSet == False:
+                msg = QMessageBox()  # makes message box
+                msg.setWindowTitle("Target IP")  # menu title
+                msg.setText("You Need To Add your Target IP ")  # window text
+                msg.setIcon(QMessageBox.Critical)  # shows ! mark when window opened
+                x = msg.exec_()  # activates message box
+            else:
+                print("Connecting To " + str(Target))
+                global Client, HostUsername, fullText, connectingToHost, ipCount
+                Client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                connecting = True
+                ipCount = 0
+                while connecting:
+                    try:
+                        Client.connect((Target, PORT))  # connect to ip on port
+                        print("connected")
+                        connecting = False
+                        connectionError = False
+                    except:
+                        QtCore.QCoreApplication.processEvents()  # so gui doesnt crash
+                        print("Cant Connect")
+                        ipCount = ipCount + 1
+                        if ipCount == 5:
+                            msg = QMessageBox()  # makes message box
+                            msg.setWindowTitle("Connect")  # menu title
+                            msg.setText("Cant connect to " + str(Target))  # window text
+                            msg.setIcon(
+                                QMessageBox.Critical
+                            )  # shows ! mark when window opened
+                            x = msg.exec_()  # activates message box
+                            connectionError = True
+                            connecting = False
                         else:
-                                publicPartner = rsa.PublicKey.load_pkcs1(Client.recv(1024))#receive partners encryption key
-                                Client.send(publicKey.save_pkcs1("PEM"))#send our encryption key
-                                        
-                                Client.send(rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner))#sends my username
-                                HostUsername = rsa.decrypt(Client.recv(1024),privateKey).decode("utf-8")#gets other persons username
-                                fullText = str(fullText) + "\nCONNECTED WITH " + str(HostUsername)#sets full text of the chat
-                                T.sleep(1)
-                                print("connected with " + str(HostUsername))
-                                self.chatBox.setText(fullText)#set text as full text
-                                Connected = True
-                                connectingToHost = True
-                                t1 = threading.Thread(target=self.receiving2)#threads run stuff at the same time
-                                t2 = threading.Thread(target=self.sending2)#threads run stuff at the same time
-                                t1.daemon = True
-                                t2.daemon = True
-                                print("starting thread1")
-                                t1.start()
-                                print("starting thread2")
-                                t2.start()
-                                print("starting updateChatBox")
-                                self.updateChatBox()
+                            T.sleep(2)
+                if connectionError:
+                    connectionError = False
+                else:
+                    publicPartner = rsa.PublicKey.load_pkcs1(
+                        Client.recv(1024)
+                    )  # receive partners encryption key
+                    Client.send(publicKey.save_pkcs1("PEM"))  # send our encryption key
+
+                    Client.send(
+                        rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner)
+                    )  # sends my username
+                    HostUsername = rsa.decrypt(Client.recv(1024), privateKey).decode(
+                        "utf-8"
+                    )  # gets other persons username
+                    fullText = (
+                        str(fullText) + "\nCONNECTED WITH " + str(HostUsername)
+                    )  # sets full text of the chat
+                    T.sleep(1)
+                    print("connected with " + str(HostUsername))
+                    self.chatBox.setText(fullText)  # set text as full text
+                    Connected = True
+                    connectingToHost = True
+                    t1 = threading.Thread(
+                        target=self.receiving2
+                    )  # threads run stuff at the same time
+                    t2 = threading.Thread(
+                        target=self.sending2
+                    )  # threads run stuff at the same time
+                    t1.daemon = True
+                    t2.daemon = True
+                    print("starting thread1")
+                    t1.start()
+                    print("starting thread2")
+                    t2.start()
+                    print("starting updateChatBox")
+                    self.updateChatBox()
+
     def receiving2(self):
-                        global Client, HostUsername, sendButtonClicked, receiver, otherPersonStreaming, screenShareOn, Connected, fullText, Hosting, connectingToHost, incomingCall, notJoining, inCall, privateKey
-                        print("started receiving-conn")
-                        while True:
-                                try:
-                                        if Connected == False:
-                                                break
-                                        else:
-                                                message = rsa.decrypt(Client.recv(1024), privateKey).decode("utf-8")
-                                                print("message received-conn")
-                                                if message == "!LEAVINGTHECHAT!":
-                                                        print(str(HostUsername) + " Has Left The Chat")
-                                                        fullText = fullText + "\n" + str(HostUsername) + " Has Left the chat"
-                                                        Hosting = False
-                                                        connectingToHost = False
-                                                        Connected = False
-                                                        sendButtonClicked = True
-                                                        Client.shutdown(socket.SHUT_RDWR)
-                                                        Client.close()
-                                                elif message == "!STARTING_SCREEN_SHARE!":
-                                                        if screenShareOn:
-                                                                receiver = StreamingServer(IP, 9998)
-                                                                print("starting port 9998")
-                                                        else:
-                                                                receiver = StreamingServer(IP, 9999)
-                                                                print("starting port 9999")
-                                                        screenShareThread = threading.Thread(target=receiver.start_server)
-                                                        screenShareThread.start()
-                                                        otherPersonStreaming = True
-                                                elif message == "!STOP_SHARE_SCREEN!":
-                                                        print("stoping share screen")
-                                                        fullText = str(fullText) + "\nSTOPING SHARESCREEN" #adding to full chat
-                                                        sendButtonClicked = True #update textbox
-                                                        try:
-                                                                receiver.stop_server() #stop other person from streaming
-                                                                otherPersonStreaming = False #set other person streaming to false
-                                                        except:
-                                                                print("ERROR CANT STOP")
-                                                elif message == "!INCOMING_CALL!":
-                                                        incomingCall = True
-                                                elif message == "!NOT_JOINING!":
-                                                        notJoining = True
-                                                elif message == "!JOINING_CALL!":
-                                                        audioRecver1 = AudioReceiver(IP, 15567)
-                                                        audiorecverThread1 = threading.Thread(target=audioRecver1.start_server)
-                                                        audioSend1 = AudioSender(IP, 15568)
-                                                        audioSendThread1 = threading.Thread(target=audioSend1.start_stream)
-                                                        
-                                                        audiorecverThread1.start()
-                                                        audioSendThread1.start()
-                                                        inCall = True
-                                                else:
-                                                        print("\n" + str(HostUsername) + "->" + str(message))#send message to textbox
-                                                        fullText = fullText + "\n" + str(HostUsername) + "->" + str(message)
-                                                        print("recv2 send true")
-                                                        sendButtonClicked = True
-                                except:
-                                        pass
+        global Client, HostUsername, sendButtonClicked, receiver, otherPersonStreaming, screenShareOn, Connected, fullText, Hosting, connectingToHost, incomingCall, notJoining, inCall, privateKey
+        print("started receiving-conn")
+        while True:
+            try:
+                if Connected == False:
+                    break
+                else:
+                    message = rsa.decrypt(Client.recv(1024), privateKey).decode("utf-8")
+                    print("message received-conn")
+                    if message == "!LEAVINGTHECHAT!":
+                        print(str(HostUsername) + " Has Left The Chat")
+                        fullText = (
+                            fullText + "\n" + str(HostUsername) + " Has Left the chat"
+                        )
+                        Hosting = False
+                        connectingToHost = False
+                        Connected = False
+                        sendButtonClicked = True
+                        Client.shutdown(socket.SHUT_RDWR)
+                        Client.close()
+                    elif message == "!STARTING_SCREEN_SHARE!":
+                        if screenShareOn:
+                            receiver = StreamingServer(IP, 9998)
+                            print("starting port 9998")
+                        else:
+                            receiver = StreamingServer(IP, 9999)
+                            print("starting port 9999")
+                        screenShareThread = threading.Thread(
+                            target=receiver.start_server
+                        )
+                        screenShareThread.start()
+                        otherPersonStreaming = True
+                    elif message == "!STOP_SHARE_SCREEN!":
+                        print("stoping share screen")
+                        fullText = (
+                            str(fullText) + "\nSTOPING SHARESCREEN"
+                        )  # adding to full chat
+                        sendButtonClicked = True  # update textbox
+                        try:
+                            receiver.stop_server()  # stop other person from streaming
+                            otherPersonStreaming = (
+                                False  # set other person streaming to false
+                            )
+                        except:
+                            print("ERROR CANT STOP")
+                    elif message == "!INCOMING_CALL!":
+                        incomingCall = True
+                    elif message == "!NOT_JOINING!":
+                        notJoining = True
+                    elif message == "!JOINING_CALL!":
+                        audioRecver1 = AudioReceiver(IP, 15567)
+                        audiorecverThread1 = threading.Thread(
+                            target=audioRecver1.start_server
+                        )
+                        audioSend1 = AudioSender(IP, 15568)
+                        audioSendThread1 = threading.Thread(
+                            target=audioSend1.start_stream
+                        )
+
+                        audiorecverThread1.start()
+                        audioSendThread1.start()
+                        inCall = True
+                    else:
+                        print(
+                            "\n" + str(HostUsername) + "->" + str(message)
+                        )  # send message to textbox
+                        fullText = (
+                            fullText + "\n" + str(HostUsername) + "->" + str(message)
+                        )
+                        print("recv2 send true")
+                        sendButtonClicked = True
+            except:
+                pass
 
     def sending2(self):
-                        global sendButtonClicked2, fullText, Client, Connected, publicPartner
-                        sendButtonClicked2 = False
-                        print("started sending-conn")
-                        while True:
-                                if Connected == False:
-                                        break
-                                else:
-                                        if sendButtonClicked2:
-                                                print("Sending ClientSide")
-                                                message = str(self.textBox.text())
+        global sendButtonClicked2, fullText, Client, Connected, publicPartner
+        sendButtonClicked2 = False
+        print("started sending-conn")
+        while True:
+            if Connected == False:
+                break
+            else:
+                if sendButtonClicked2:
+                    print("Sending ClientSide")
+                    message = str(self.textBox.text())
 
-                                                Client.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
-                                                fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
-                                                print("setting Text")
-                                                sendButtonClicked2 = False
-                                        else:
-                                                pass
+                    Client.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
+                    fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
+                    print("setting Text")
+                    sendButtonClicked2 = False
+                else:
+                    pass
 
-                
+
 def main():
-        global directory, publicIp, privateIp
-        print("Public IP->" + str(publicIp))
-        print("Probably Your Private IP->" + str(privateIp))
-        app = QtWidgets.QApplication(sys.argv)#starts application 
-        Liscord = QtWidgets.QMainWindow()#makes main window
-        fullIconDirectory = directory + "\\LiscordFlat.png"
-        print(fullIconDirectory)
-        Liscord.setWindowIcon(QtGui.QIcon("LiscordFlat.png"))#sets liscord app icon
-        ui = Ui_Liscord() #sets ui to Liscords ui
-        ui.setupUi(Liscord) #sets up ui
-        Liscord.show() #shows main window
-        sys.exit(app.exec_())#if exit button pressed exit
-                
-    
-        
-main()#start main
+    global directory, publicIp, privateIp
+    print("Public IP->" + str(publicIp))
+    print("Probably Your Private IP->" + str(privateIp))
+    app = QtWidgets.QApplication(sys.argv)  # starts application
+    Liscord = QtWidgets.QMainWindow()  # makes main window
+    fullIconDirectory = directory + "\\LiscordFlat.png"
+    print(fullIconDirectory)
+    Liscord.setWindowIcon(QtGui.QIcon("LiscordFlat.png"))  # sets liscord app icon
+    ui = Ui_Liscord()  # sets ui to Liscords ui
+    ui.setupUi(Liscord)  # sets up ui
+    Liscord.show()  # shows main window
+    sys.exit(app.exec_())  # if exit button pressed exit
+
+
+main()  # start main
