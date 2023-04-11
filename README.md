@@ -3,6 +3,8 @@ Chat App Made In Python For Same Network Communication or Port Forwarding
 
 # Disclaimer
 
+# This Code Is Really Really Bad Nearly Unreadable
+
 # I AM NOT RESPONSIBLE IF ANYTHING BAD HAPPENS
 
 This was Made as a first year college project for computing science Do not expect it to work
