@@ -622,14 +622,14 @@ class Ui_Liscord(object):
         self.enterText.setToolTip(_translate("Liscord", "Enter"))
         self.enterText.setText(_translate("Liscord", "⏎"))
 ##############################################################################################################################################################################################
-        
+
         '''
-        
+
         buttons
 
         '''
-        
-        
+
+
         self.helpButton.clicked.connect(self.help)#if Help button pressed
         self.pushButton_2.clicked.connect(self.targetClicked)#if enter my ip button pressed
         self.pushButton.clicked.connect(self.ipClicked)#if target ip button pressed
@@ -671,7 +671,7 @@ class Ui_Liscord(object):
                 msg.setText("You Need To Be Connected To ScreenShare")#ScreenShare window text
                 msg.setIcon(QMessageBox.Critical)#shows ! mark when ScreenShare window opened
                 x = msg.exec_() #activates message box
-                
+
 
     def voip(self):
         global Connected, Hosting, inCall, publicPartner
@@ -809,7 +809,7 @@ class Ui_Liscord(object):
                                 hostIpError = False
                         except:
                                 hostIpError = True
-                                
+
 
                         if hostIpError:
                                 msg = QMessageBox() #makes message box
@@ -836,7 +836,7 @@ class Ui_Liscord(object):
                                                 if hostAcceptingCount == 30:
                                                         hostAcceptingError = True#error
                                                         accepting = False#stop looping
-                                
+
                                 if hostAcceptingError:
                                         msg = QMessageBox() #makes message box
                                         msg.setWindowTitle("Host Connection")#menu title
@@ -934,9 +934,9 @@ class Ui_Liscord(object):
                                 else:
                                         pass
 
-                            
+
     def sendButtonClicked(self):
-        
+
         print("send button clicked")
         global sendButtonClicked, sendButtonClicked2
         sendButtonClicked = True
@@ -992,7 +992,7 @@ class Ui_Liscord(object):
                         msg.setIcon(QMessageBox.Information)#shows question mark when help window opened
                         x = msg.exec_() #activates message box
                         return myUserName, UserNameSet
-                        
+
                 return myUserName, UserNameSet
 
     def targetClicked(self):
@@ -1050,7 +1050,7 @@ class Ui_Liscord(object):
                                                 x = msg.exec_() #activates message box
                                                 error = True
 
-                                
+
                         if ":" in Target and TargetType == "" and error is False:
                                 TargetType = "Ipv6"
                         if TargetType == "" and error is False:
@@ -1087,7 +1087,7 @@ class Ui_Liscord(object):
                 global IP
                 IP = self.hostIPBox.text()
                 error2 = False
-        
+
                 if " " in IP:#if space in ip
                         IP = "" 
                         msg = QMessageBox() #makes message box
@@ -1137,7 +1137,7 @@ class Ui_Liscord(object):
                                                 x = msg.exec_() #activates message box
                                                 error2 = True #sets it as error so it skips the rest of the function
 
-                                
+
                         if ":" in IP and IpType == "" and error2 is False:
                                 IpType = "Ipv6"
                         if IpType == "" and error2 is False:
@@ -1160,9 +1160,9 @@ class Ui_Liscord(object):
                 return IP        
 
 
-        
 
-    
+
+
 
 
 
@@ -1231,7 +1231,7 @@ class Ui_Liscord(object):
                         else:
                                 publicPartner = rsa.PublicKey.load_pkcs1(Client.recv(1024))#receive partners encryption key
                                 Client.send(publicKey.save_pkcs1("PEM"))#send our encryption key
-                                        
+
                                 Client.send(rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner))#sends my username
                                 HostUsername = rsa.decrypt(Client.recv(1024),privateKey).decode("utf-8")#gets other persons username
                                 fullText = str(fullText) + "\nCONNECTED WITH " + str(HostUsername)#sets full text of the chat
@@ -1297,7 +1297,7 @@ class Ui_Liscord(object):
                                                         audiorecverThread1 = threading.Thread(target=audioRecver1.start_server)
                                                         audioSend1 = AudioSender(IP, 15568)
                                                         audioSendThread1 = threading.Thread(target=audioSend1.start_stream)
-                                                        
+
                                                         audiorecverThread1.start()
                                                         audioSendThread1.start()
                                                         inCall = True
@@ -1328,7 +1328,7 @@ class Ui_Liscord(object):
                                         else:
                                                 pass
 
-                
+
 def main():
         global directory, publicIp, privateIp
         print("Public IP->" + str(publicIp))
@@ -1342,7 +1342,7 @@ def main():
         ui.setupUi(Liscord) #sets up ui
         Liscord.show() #shows main window
         sys.exit(app.exec_())#if exit button pressed exit
-                
-    
-        
+
+
+
 main()#start main
