@@ -650,7 +650,7 @@ class Ui_Liscord(object):
                         sender = ScreenShareClient(IP, 9998)
                 else:
                         sender = ScreenShareClient(IP, 9999)
-                if screenShareOn == False:#if screenShareOn not on
+                if screenShareOn is False:#if screenShareOn not on
                         screenShareOn = True
                         screenshareThread = threading.Thread(target=sender.start_stream)
                         if Hosting:
@@ -675,7 +675,7 @@ class Ui_Liscord(object):
 
     def voip(self):
         global Connected, Hosting, inCall, publicPartner
-        if Connected == False:
+        if Connected is False:
                 msg = QMessageBox() #makes message box
                 msg.setWindowTitle("VOIP")#VOIP menu title
                 msg.setText("You Need To Be Connected To Call Someone")#VOIP window text
@@ -790,13 +790,13 @@ class Ui_Liscord(object):
                 msg.setIcon(QMessageBox.Critical)#shows ! mark when Host window opened
                 x = msg.exec_() #activates message box
         else:#if not connected
-                if UserNameSet == False:
+                if UserNameSet is False:
                         msg = QMessageBox() #makes message box
                         msg.setWindowTitle("Username")#menu title
                         msg.setText("You Need To Add your Username ")#window text
                         msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
                         x = msg.exec_() #activates message box  
-                elif IpSet == False:
+                elif IpSet is False:
                         msg = QMessageBox() #makes message box
                         msg.setWindowTitle("Your IP")#menu title
                         msg.setText("You Need To Add your IP ")#window text
@@ -868,7 +868,7 @@ class Ui_Liscord(object):
                 sendButtonClicked = False
                 while True:
                         try:
-                                if Connected == False:
+                                if Connected is False:
                                         break
                                 else:
                                         message = rsa.decrypt(conn.recv(1024), privateKey).decode("utf-8")# receive message decrpt and decode
@@ -921,7 +921,7 @@ class Ui_Liscord(object):
                 global sendButtonClicked2, fullText, conn, Connected, publicPartner
                 sendButtonClicked2 = False
                 while True:
-                        if Connected == False:
+                        if Connected is False:
                                 break
                         else:
                                 if sendButtonClicked2:
@@ -1051,9 +1051,9 @@ class Ui_Liscord(object):
                                                 error = True
 
                                 
-                        if ":" in Target and TargetType == "" and error == False:
+                        if ":" in Target and TargetType == "" and error is False:
                                 TargetType = "Ipv6"
-                        if TargetType == "" and error == False:
+                        if TargetType == "" and error is False:
                                 Target = ""
                                 print("Target invalid")
                                 msg = QMessageBox() #makes message box
@@ -1061,7 +1061,7 @@ class Ui_Liscord(object):
                                 msg.setText("Invalid Target")#window text
                                 msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
                                 x = msg.exec_() #activates message box
-                        elif error == False:
+                        elif error is False:
                                 print("Target IP = " + "(" + str(Target) + ") IP type = " + str(TargetType))
                                 msg = QMessageBox() #makes message box
                                 msg.setWindowTitle("Target")#menu title
@@ -1138,9 +1138,9 @@ class Ui_Liscord(object):
                                                 error2 = True #sets it as error so it skips the rest of the function
 
                                 
-                        if ":" in IP and IpType == "" and error2 == False:
+                        if ":" in IP and IpType == "" and error2 is False:
                                 IpType = "Ipv6"
-                        if IpType == "" and error2 == False:
+                        if IpType == "" and error2 is False:
                                 IP = ""
                                 print("target invalid")
                                 msg = QMessageBox() #makes message box
@@ -1148,7 +1148,7 @@ class Ui_Liscord(object):
                                 msg.setText("Invalid IP")#window text
                                 msg.setIcon(QMessageBox.Critical)#shows ! mark when help window opened
                                 x = msg.exec_() #activates message box
-                        elif error2 == False: 
+                        elif error2 is False: 
                                 print("Your IP = " + "(" + str(IP) + ") IP type = " + str(IpType))
                                 msg = QMessageBox() #makes message box
                                 msg.setWindowTitle("IP")#menu title
@@ -1182,19 +1182,19 @@ class Ui_Liscord(object):
                 msg.setIcon(QMessageBox.Critical)#shows ! mark when Host window opened
                 x = msg.exec_() #activates message box
         else:
-                if UserNameSet == False:
+                if UserNameSet is False:
                         msg = QMessageBox() #makes message box
                         msg.setWindowTitle("Username")#menu title
                         msg.setText("You Need To Add your Username ")#window text
                         msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
                         x = msg.exec_() #activates message box  
-                elif IpSet == False:
+                elif IpSet is False:
                         msg = QMessageBox() #makes message box
                         msg.setWindowTitle("Your IP")#menu title
                         msg.setText("You Need To Add your IP ")#window text
                         msg.setIcon(QMessageBox.Critical)#shows ! mark when window opened
                         x = msg.exec_() #activates message box 
-                elif TargetSet == False:
+                elif TargetSet is False:
                         msg = QMessageBox() #makes message box
                         msg.setWindowTitle("Target IP")#menu title
                         msg.setText("You Need To Add your Target IP ")#window text
@@ -1255,7 +1255,7 @@ class Ui_Liscord(object):
                         print("started receiving-conn")
                         while True:
                                 try:
-                                        if Connected == False:
+                                        if Connected is False:
                                                 break
                                         else:
                                                 message = rsa.decrypt(Client.recv(1024), privateKey).decode("utf-8")
@@ -1314,7 +1314,7 @@ class Ui_Liscord(object):
                         sendButtonClicked2 = False
                         print("started sending-conn")
                         while True:
-                                if Connected == False:
+                                if Connected is False:
                                         break
                                 else:
                                         if sendButtonClicked2:
