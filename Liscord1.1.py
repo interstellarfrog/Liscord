@@ -11,10 +11,11 @@ import rsa
 
 import time as T
 from vidstream import ScreenShareClient, AudioReceiver, AudioSender, StreamingServer
+
 global Target, publicIp, privateIp, Connected, Hosting, connectingToHost, otherPersonStreaming, fullText, screenShareOn, setText, IpSet, UserNameSet, TargetSet, incomingCall, notJoining, inCall, directory, publicPartner, publicKey, privateKey
 so = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # socket connection
 hostName = socket.gethostname()  # gets host name
-publicIp = requests.get('https://api.ipify.org/').text  # gets public ip
+publicIp = requests.get("https://api.ipify.org/").text  # gets public ip
 privateIp = socket.gethostbyname(hostName)  # gets private ip of host name
 Hosting = False
 connectingToHost = False
@@ -26,7 +27,7 @@ TargetSet = False
 IpType = ""
 error = False
 PORT = 55555
-fullText = ("C͟H͟A͟T͟")
+fullText = "C͟H͟A͟T͟"
 setText = False
 incomingCall = False
 screenShareOn = False
@@ -39,23 +40,21 @@ publicPartner = None
 Target = ""
 
 
-'''
+"""
 GUI
-'''
+"""
 
 
 ##################################################################################################################################################
 class Ui_Liscord(object):
     def setupUi(self, Liscord):
-        Liscord.setWindowIcon(QtGui.QIcon(
-            str(directory) + "\\LiscordFlat.png"))
+        Liscord.setWindowIcon(QtGui.QIcon(str(directory) + "\\LiscordFlat.png"))
         Liscord.setObjectName("Liscord")
         Liscord.resize(850, 657)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
@@ -76,12 +75,10 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.BrightText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.BrightText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
@@ -93,20 +90,16 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.AlternateBase, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ToolTipBase, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ToolTipText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
@@ -115,8 +108,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Light, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.Midlight, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Midlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Dark, brush)
@@ -128,12 +120,10 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.BrightText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.BrightText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
@@ -145,20 +135,16 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.AlternateBase, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ToolTipBase, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ToolTipText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
@@ -167,8 +153,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Light, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.Midlight, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Midlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Dark, brush)
@@ -180,12 +165,10 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.BrightText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
@@ -197,16 +180,13 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.AlternateBase, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ToolTipBase, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ToolTipText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
         Liscord.setPalette(palette)
         font = QtGui.QFont()
         font.setBold(False)
@@ -214,12 +194,14 @@ class Ui_Liscord(object):
         Liscord.setFont(font)
         Liscord.setMouseTracking(False)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Pictures/Liscord.png"),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("../Pictures/Liscord.png"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         Liscord.setWindowIcon(icon)
         Liscord.setAutoFillBackground(False)
-        Liscord.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                              "")
+        Liscord.setStyleSheet("background-color: rgb(0, 0, 0);\n" "")
         self.centralwidget = QtWidgets.QWidget(Liscord)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -241,17 +223,20 @@ class Ui_Liscord(object):
         self.LiscordTitle.setObjectName("LiscordTitle")
         self.verticalLayout_2.addWidget(self.LiscordTitle)
         self.line = QtWidgets.QFrame(self.widget_6)
-        self.line.setStyleSheet("color:rgb(0, 0, 127);\n"
-                                "background-color:rgb(0, 0, 127);")
+        self.line.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color:rgb(0, 0, 127);"
+        )
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.verticalLayout_2.addWidget(self.line)
         spacerItem = QtWidgets.QSpacerItem(
-            258, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            258, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem)
         spacerItem1 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem1)
         self.IPTitle = QtWidgets.QLabel(self.widget_6)
         font = QtGui.QFont()
@@ -266,8 +251,7 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(18)
         self.hostIPBox.setFont(font)
-        self.hostIPBox.setStyleSheet("color: rgb(0, 0, 127);\n"
-                                     "")
+        self.hostIPBox.setStyleSheet("color: rgb(0, 0, 127);\n" "")
         self.hostIPBox.setText("")
         self.hostIPBox.setObjectName("hostIPBox")
         self.verticalLayout_2.addWidget(self.hostIPBox)
@@ -287,8 +271,7 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(18)
         self.targetIPBox.setFont(font)
-        self.targetIPBox.setStyleSheet("color: rgb(0, 0, 127);\n"
-                                       "")
+        self.targetIPBox.setStyleSheet("color: rgb(0, 0, 127);\n" "")
         self.targetIPBox.setInputMask("")
         self.targetIPBox.setText("")
         self.targetIPBox.setObjectName("targetIPBox")
@@ -298,7 +281,8 @@ class Ui_Liscord(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_2.addWidget(self.pushButton_2)
         spacerItem2 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem2)
 
         self.HostButton = QtWidgets.QPushButton(self.widget_6)
@@ -308,9 +292,9 @@ class Ui_Liscord(object):
         font.setBold(True)
         font.setWeight(75)
         self.HostButton.setFont(font)
-        self.HostButton.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-                                      "color: rgb(0, 0, 125);\n"
-                                      "")
+        self.HostButton.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color: rgb(0, 0, 125);\n" ""
+        )
         self.HostButton.setObjectName("HostButton")
         self.HostButton.setToolTip("Press To Host Connection")
         self.verticalLayout_2.addWidget(self.HostButton)
@@ -319,8 +303,7 @@ class Ui_Liscord(object):
         self.HostButton.setPalette(palette)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         self.HostButton.setPalette(palette)
 
         self.Connect_button = QtWidgets.QPushButton(self.widget_6)
@@ -337,19 +320,22 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(28)
         self.Disconnect.setFont(font)
-        self.Disconnect.setStyleSheet("color: rgb(140, 0, 0);\n"
-                                      "background-color: rgb(17, 17, 17);\n"
-                                      "")
+        self.Disconnect.setStyleSheet(
+            "color: rgb(140, 0, 0);\n" "background-color: rgb(17, 17, 17);\n" ""
+        )
         self.Disconnect.setObjectName("Disconnect")
         self.verticalLayout_2.addWidget(self.Disconnect)
         spacerItem3 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem3)
         spacerItem4 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem4)
         spacerItem5 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.verticalLayout_2.addItem(spacerItem5)
         self.horizontalLayout_3.addWidget(self.widget_6)
         self.widget_8 = QtWidgets.QWidget(self.centralwidget)
@@ -357,7 +343,8 @@ class Ui_Liscord(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_8)
         self.verticalLayout.setObjectName("verticalLayout")
         spacerItem6 = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout.addItem(spacerItem6)
         self.startVoip = QtWidgets.QPushButton(self.widget_8)
         font = QtGui.QFont()
@@ -365,16 +352,16 @@ class Ui_Liscord(object):
         font.setBold(True)
         font.setWeight(75)
         self.startVoip.setFont(font)
-        self.startVoip.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-                                     "color: rgb(0, 0, 127);")
+        self.startVoip.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color: rgb(0, 0, 127);"
+        )
         self.startVoip.setObjectName("startVoip")
         self.verticalLayout.addWidget(self.startVoip)
         self.screenShare = QtWidgets.QPushButton(self.widget_8)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
@@ -383,8 +370,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
@@ -393,8 +379,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
@@ -403,8 +388,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
@@ -413,8 +397,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
@@ -423,8 +406,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(17, 17, 17))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
@@ -438,10 +420,9 @@ class Ui_Liscord(object):
         font.setWeight(75)
         self.screenShare.setFont(font)
         self.screenShare.setMouseTracking(False)
-        self.screenShare.setStyleSheet("background-color: rgb(17, 17, 17);\n"
-                                       "color:rgb(0, 0, 127);\n"
-                                       "\n"
-                                       "")
+        self.screenShare.setStyleSheet(
+            "background-color: rgb(17, 17, 17);\n" "color:rgb(0, 0, 127);\n" "\n" ""
+        )
         self.screenShare.setAutoExclusive(False)
         self.screenShare.setObjectName("screenShare")
         self.verticalLayout.addWidget(self.screenShare)
@@ -449,13 +430,14 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(37)
         self.helpButton.setFont(font)
-        self.helpButton.setStyleSheet("color: rgb(0, 0, 127);\n"
-                                      "background-color: rgb(17, 17, 17);\n"
-                                      "")
+        self.helpButton.setStyleSheet(
+            "color: rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);\n" ""
+        )
         self.helpButton.setObjectName("helpButton")
         self.verticalLayout.addWidget(self.helpButton)
         spacerItem7 = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout.addItem(spacerItem7)
         self.horizontalLayout_3.addWidget(self.widget_8)
         self.widget_3 = QtWidgets.QWidget(self.centralwidget)
@@ -466,8 +448,9 @@ class Ui_Liscord(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.timeLabel.setFont(font)
-        self.timeLabel.setStyleSheet("color:rgb(255, 255, 255);\n"
-                                     "background-color: rgb(17, 17, 17);")
+        self.timeLabel.setStyleSheet(
+            "color:rgb(255, 255, 255);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.timeLabel.setText("")
         self.timeLabel.setObjectName("timeLabel")
         self.verticalLayout_4.addWidget(self.timeLabel)
@@ -500,8 +483,9 @@ class Ui_Liscord(object):
         font.setWeight(50)
         font.setStrikeOut(False)
         self.usernameButton.setFont(font)
-        self.usernameButton.setStyleSheet("color:rgb(0, 0, 127);\n"
-                                          "background-color: rgb(17, 17, 17);")
+        self.usernameButton.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.usernameButton.setObjectName("usernameButton")
         self.horizontalLayout_2.addWidget(self.usernameButton)
         self.usernameButton.raise_()
@@ -512,8 +496,7 @@ class Ui_Liscord(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
@@ -522,8 +505,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
@@ -532,8 +514,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
@@ -542,8 +523,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
@@ -552,8 +532,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
@@ -562,8 +541,7 @@ class Ui_Liscord(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
@@ -606,8 +584,9 @@ class Ui_Liscord(object):
         self.enterText.setFont(font)
         self.enterText.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.enterText.setAutoFillBackground(False)
-        self.enterText.setStyleSheet("color:rgb(0, 0, 127);\n"
-                                     "background-color: rgb(17, 17, 17);")
+        self.enterText.setStyleSheet(
+            "color:rgb(0, 0, 127);\n" "background-color: rgb(17, 17, 17);"
+        )
         self.enterText.setObjectName("enterText")
         self.horizontalLayout.addWidget(self.enterText)
         self.verticalLayout_4.addWidget(self.widget)
@@ -629,39 +608,52 @@ class Ui_Liscord(object):
         self.targetIPBox.setPlaceholderText(_translate("Liscord", "Connect"))
         self.pushButton_2.setToolTip(_translate("Liscord", "Confirm"))
         self.pushButton_2.setText(_translate("Liscord", "CONFIRM"))
-        self.Connect_button.setToolTip(_translate(
-            "Liscord", "<html><head/><body><p>Connects to target ip with your ip</p></body></html>"))
+        self.Connect_button.setToolTip(
+            _translate(
+                "Liscord",
+                "<html><head/><body><p>Connects to target ip with your ip</p></body></html>",
+            )
+        )
         self.Connect_button.setText(_translate("Liscord", "Connect"))
-        self.Disconnect.setToolTip(_translate(
-            "Liscord", "Disconnect from everything"))
+        self.Disconnect.setToolTip(_translate("Liscord", "Disconnect from everything"))
         self.Disconnect.setText(_translate("Liscord", "Disconnect"))
-        self.startVoip.setToolTip(_translate(
-            "Liscord", "Start a call with other members of the chat"))
+        self.startVoip.setToolTip(
+            _translate("Liscord", "Start a call with other members of the chat")
+        )
         self.startVoip.setText(_translate("Liscord", "Call"))
-        self.screenShare.setToolTip(_translate(
-            "Liscord", "<html><head/><body><p>Show your screen to other members of the chat</p></body></html>"))
+        self.screenShare.setToolTip(
+            _translate(
+                "Liscord",
+                "<html><head/><body><p>Show your screen to other members of the chat</p></body></html>",
+            )
+        )
         self.screenShare.setText(_translate("Liscord", "screen share"))
-        self.helpButton.setToolTip(_translate(
-            "Liscord", "Click if you dont know what you are doing"))
+        self.helpButton.setToolTip(
+            _translate("Liscord", "Click if you dont know what you are doing")
+        )
         self.helpButton.setText(_translate("Liscord", "Help!"))
         self.USERNAMETitle.setText(_translate("Liscord", "USERNAME"))
         self.usernameButton.setToolTip(_translate("Liscord", "Enter"))
         self.usernameButton.setText(_translate("Liscord", "⏎"))
-        self.chatBox.setHtml(_translate("Liscord", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                        "p, li { white-space: pre-wrap; }\n"
-                                        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-                                        "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; text-decoration: underline; color:#ff0000;\">CHAT</span></p></body></html>"))
-        self.textBox.setPlaceholderText(
-            _translate("Liscord", "Start Chatting!"))
+        self.chatBox.setHtml(
+            _translate(
+                "Liscord",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600; text-decoration: underline; color:#ff0000;">CHAT</span></p></body></html>',
+            )
+        )
+        self.textBox.setPlaceholderText(_translate("Liscord", "Start Chatting!"))
         self.enterText.setToolTip(_translate("Liscord", "Enter"))
         self.enterText.setText(_translate("Liscord", "⏎"))
-##############################################################################################################################################################################################
+        ##############################################################################################################################################################################################
 
-        '''
+        """
         
         buttons
-        '''
+        """
 
         self.helpButton.clicked.connect(self.help)  # if Help button pressed
         # if enter my ip button pressed
@@ -669,9 +661,9 @@ class Ui_Liscord(object):
         # if target ip button pressed
         self.pushButton.clicked.connect(self.ipClicked)
         self.usernameButton.clicked.connect(
-            self.usernameClicked)  # if username button pressed
-        self.Connect_button.clicked.connect(
-            self.connect)  # if connect button pressed
+            self.usernameClicked
+        )  # if username button pressed
+        self.Connect_button.clicked.connect(self.connect)  # if connect button pressed
         self.HostButton.clicked.connect(self.Host)  # if host button pressed
         # if enter text button pressed
         self.enterText.clicked.connect(self.sendButtonClicked)
@@ -690,25 +682,36 @@ class Ui_Liscord(object):
                 sender = ScreenShareClient(IP, 9999)
             if screenShareOn == False:  # if screenShareOn not on
                 screenShareOn = True
-                screenshareThread = threading.Thread(
-                    target=sender.start_stream)
+                screenshareThread = threading.Thread(target=sender.start_stream)
                 if Hosting:
-                    conn.send(rsa.encrypt("!STARTING_SCREEN_SHARE!".encode(
-                        "utf-8"), publicPartner))  # send encrypted and encoded text
+                    conn.send(
+                        rsa.encrypt(
+                            "!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
                 elif connectingToHost:
-                    Client.send(rsa.encrypt("!STARTING_SCREEN_SHARE!".encode(
-                        "utf-8"), publicPartner))  # send encrypted and encoded text
+                    Client.send(
+                        rsa.encrypt(
+                            "!STARTING_SCREEN_SHARE!".encode("utf-8"), publicPartner
+                        )
+                    )  # send encrypted and encoded text
                 screenshareThread.start()
             else:
                 if Hosting:
                     # send encrypted and encoded text
-                    conn.send(rsa.encrypt(
-                        "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner))
+                    conn.send(
+                        rsa.encrypt(
+                            "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner
+                        )
+                    )
                     screenShareOn = False
                 elif connectingToHost:
                     # send encrypted and encoded text
-                    Client.send(rsa.encrypt(
-                        "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner))
+                    Client.send(
+                        rsa.encrypt(
+                            "!STOP_SHARE_SCREEN!".encode("utf-8"), publicPartner
+                        )
+                    )
                     screenShareOn = False
         else:
             msg = QMessageBox()  # makes message box
@@ -741,12 +744,14 @@ class Ui_Liscord(object):
             else:
                 if Hosting:
                     # send encrypted and encoded text
-                    conn.send(rsa.encrypt(
-                        "!INCOMING_CALL!".encode("utf-8"), publicPartner))
+                    conn.send(
+                        rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner)
+                    )
                 elif connectingToHost:
                     # send encrypted and encoded text
-                    Client.send(rsa.encrypt(
-                        "!INCOMING_CALL!".encode("utf-8"), publicPartner))
+                    Client.send(
+                        rsa.encrypt("!INCOMING_CALL!".encode("utf-8"), publicPartner)
+                    )
 
     def disconnect(self):
         global Connected, conn, Host, fullText, sendButtonClicked, Hosting, connectingToHost, publicPartner
@@ -754,8 +759,9 @@ class Ui_Liscord(object):
         if Connected:
             if Hosting:
                 # send encrypted and encoded text
-                conn.send(rsa.encrypt(
-                    "!LEAVINGTHECHAT!".encode("utf-8"), publicPartner))
+                conn.send(
+                    rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner)
+                )
                 conn.shutdown(socket.SHUT_RDWR)
                 conn.close()
                 Host.close()
@@ -766,8 +772,9 @@ class Ui_Liscord(object):
                 connectingToHost = False
             elif connectingToHost:
                 # send encrypted and encoded text
-                Client.send(rsa.encrypt(
-                    "!LEAVINGTHECHAT!".encode("utf-8"), publicPartner))
+                Client.send(
+                    rsa.encrypt("!LEAVINGTHECHAT!".encode("utf-8"), publicPartner)
+                )
                 Client.shutdown(socket.SHUT_RDWR)
                 Client.close()
                 Connected = False
@@ -805,37 +812,45 @@ class Ui_Liscord(object):
                 if x == QMessageBox.Ok:
                     if Hosting:
                         # send encrypted and encoded text
-                        conn.send(rsa.encrypt(
-                            "!JOINING_CALL!".encode("utf-8"), publicPartner))
+                        conn.send(
+                            rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner)
+                        )
                         audioRecver2 = AudioReceiver(IP, 15568)
                         audiorecverThread2 = threading.Thread(
-                            target=audioRecver2.start_server)
+                            target=audioRecver2.start_server
+                        )
                         audioSend2 = AudioSender(IP, 15567)
                         audioSendThread2 = threading.Thread(
-                            target=audioSend2.start_stream)
+                            target=audioSend2.start_stream
+                        )
                         audiorecverThread2.start()
                         audioSendThread2.start()
                         inCall = True
                     elif connectingToHost:
                         # send encrypted and encoded text
-                        Client.send(rsa.encrypt(
-                            "!JOINING_CALL!".encode("utf-8"), publicPartner))
+                        Client.send(
+                            rsa.encrypt("!JOINING_CALL!".encode("utf-8"), publicPartner)
+                        )
                         audioRecver2 = AudioReceiver(IP, 15568)
                         audiorecverThread2 = threading.Thread(
-                            target=audioRecver2.start_server)
+                            target=audioRecver2.start_server
+                        )
                         audioSend2 = AudioSender(IP, 15567)
                         audioSendThread2 = threading.Thread(
-                            target=audioSend2.start_stream)
+                            target=audioSend2.start_stream
+                        )
                         audiorecverThread2.start()
                         audioSendThread2.start()
                         inCall = True
                 elif x == QMessageBox.Cancel:
                     if Hosting:
-                        conn.send(rsa.encrypt(
-                            "!NOT_JOINING!".encode("utf-8"), publicPartner))
+                        conn.send(
+                            rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner)
+                        )
                     elif connectingToHost:
-                        Client.send(rsa.encrypt(
-                            "!NOT_JOINING!".encode("utf-8"), publicPartner))
+                        Client.send(
+                            rsa.encrypt("!NOT_JOINING!".encode("utf-8"), publicPartner)
+                        )
                 incomingCall = False
             elif notJoining:
                 msg = QMessageBox()  # makes message box
@@ -899,7 +914,10 @@ class Ui_Liscord(object):
                     hostAcceptingCount = 0
                     while accepting:
                         try:
-                            conn, addr = Host.accept()  # accepts whoever trys to connect
+                            (
+                                conn,
+                                addr,
+                            ) = Host.accept()  # accepts whoever trys to connect
                             print("connection accepted")
                             hostAcceptingError = False  # no error
                             accepting = False  # stop looping
@@ -915,23 +933,26 @@ class Ui_Liscord(object):
                         msg.setWindowTitle("Host Connection")  # menu title
                         # window text
                         msg.setText(
-                            "No One Connected To You So We Closed The Connection ")
+                            "No One Connected To You So We Closed The Connection "
+                        )
                         # shows ! mark when window opened
                         msg.setIcon(QMessageBox.Critical)
                         x = msg.exec_()  # activates message box
                     else:
                         T.sleep(1)
                         conn.send(publicKey.save_pkcs1("PEM"))
-                        publicPartner = rsa.PublicKey.load_pkcs1(
-                            conn.recv(1024))
+                        publicPartner = rsa.PublicKey.load_pkcs1(conn.recv(1024))
                         ClientUsername = rsa.decrypt(
-                            conn.recv(1024), privateKey).decode("utf-8")
+                            conn.recv(1024), privateKey
+                        ).decode("utf-8")
                         T.sleep(0.5)
-                        conn.send(rsa.encrypt(
-                            str(myUserName).encode("utf-8"), publicPartner))
+                        conn.send(
+                            rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner)
+                        )
                         print("connected with " + str(ClientUsername))
-                        fullText = str(fullText) + \
-                            "\nCONNECTED WITH " + str(ClientUsername)
+                        fullText = (
+                            str(fullText) + "\nCONNECTED WITH " + str(ClientUsername)
+                        )
                         self.chatBox.setText(str(fullText))
                         Connected = True
                         Hosting = True
@@ -951,10 +972,15 @@ class Ui_Liscord(object):
                 if Connected == False:
                     break
                 message = rsa.decrypt(conn.recv(1024), privateKey).decode(
-                    "utf-8")  # receive message decrpt and decode
+                    "utf-8"
+                )  # receive message decrpt and decode
                 if message == "!LEAVINGTHECHAT!":  # if leaving chat message received
-                    fullText = str(fullText) + "\n" + \
-                        str(ClientUsername) + " Has Left The Chat"
+                    fullText = (
+                        str(fullText)
+                        + "\n"
+                        + str(ClientUsername)
+                        + " Has Left The Chat"
+                    )
                     print(str(fullText))
                     Hosting = False
                     connectingToHost = False
@@ -963,7 +989,9 @@ class Ui_Liscord(object):
                     # shutdown read and write on the socket
                     conn.shutdown(socket.SHUT_RDWR)
                     conn.close()  # close socket
-                elif message == "!STOP_SHARE_SCREEN!":  # if stop shar screen message received
+                elif (
+                    message == "!STOP_SHARE_SCREEN!"
+                ):  # if stop shar screen message received
                     fullText = str(fullText) + "\nSTOPING SHARESCREEN"
                     sendButtonClicked = True  # set text
                     try:
@@ -974,13 +1002,11 @@ class Ui_Liscord(object):
                 elif message == "!STARTING_SCREEN_SHARE!":
                     if screenShareOn:
                         receiver = StreamingServer(IP, 9998)
-                        print("starting port 9998 " +
-                              str(otherPersonStreaming))
+                        print("starting port 9998 " + str(otherPersonStreaming))
                     else:
                         receiver = StreamingServer(IP, 9999)
                         print("starting port 9999")
-                    screenShareThread = threading.Thread(
-                        target=receiver.start_server)
+                    screenShareThread = threading.Thread(target=receiver.start_server)
                     screenShareThread.start()
                     otherPersonStreaming = True
                 elif message == "!INCOMING_CALL!":
@@ -990,16 +1016,17 @@ class Ui_Liscord(object):
                 elif message == "!JOINING_CALL!":
                     audioRecver1 = AudioReceiver(IP, 15567)
                     audiorecverThread1 = threading.Thread(
-                        target=audioRecver1.start_server)
+                        target=audioRecver1.start_server
+                    )
                     audioSend1 = AudioSender(IP, 15568)
-                    audioSendThread1 = threading.Thread(
-                        target=audioSend1.start_stream)
+                    audioSendThread1 = threading.Thread(target=audioSend1.start_stream)
                     audiorecverThread1.start()
                     audioSendThread1.start()
                     inCall = True
                 else:
-                    fullText = str(fullText) + "\n" + \
-                        str(ClientUsername) + "->" + str(message)
+                    fullText = (
+                        str(fullText) + "\n" + str(ClientUsername) + "->" + str(message)
+                    )
                     print("received message setting text box")
                     sendButtonClicked = True
             except:
@@ -1015,17 +1042,14 @@ class Ui_Liscord(object):
                 # get message from text box
                 message = str(self.textBox.text())
                 print("sending message")
-                conn.send(rsa.encrypt(
-                    message.encode("utf-8"), publicPartner))
-                fullText = fullText + "\n" + \
-                    str(myUserName) + "->" + str(message)
+                conn.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
+                fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
                 print("setting text")
                 sendButtonClicked2 = False
             else:
                 pass
 
     def sendButtonClicked(self):
-
         print("send button clicked")
         global sendButtonClicked, sendButtonClicked2
         sendButtonClicked = True
@@ -1047,12 +1071,45 @@ class Ui_Liscord(object):
             msg.setWindowTitle("Username")  # help menu title
             # help window text
             msg.setText(
-                "UserName cant be less than 3 characters or more than 12 characters")
+                "UserName cant be less than 3 characters or more than 12 characters"
+            )
             # shows question mark when help window opened
             msg.setIcon(QMessageBox.Critical)
             x = msg.exec_()  # activates message box
         # getting out invisible letters
-        elif 'ㅤ' in myUserName or '	' in myUserName or ' ' in myUserName or ' ' in myUserName or '͏͏­­­­­؜­' in myUserName or 'ᅟ' in myUserName or 'ᅟ' in myUserName or 'ᅠ' in myUserName or '឵᠎᠎ ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or '‎​​‌' in myUserName or '‏' in myUserName or ' ' in myUserName or ' ' in myUserName or ' ' in myUserName or '　⁯⁭⁮⁣' in myUserName or '　' in myUserName or '⠀' in myUserName or 'ㅤ' in myUserName or '﻿' in myUserName or 'ﾠ' in myUserName or '𝅙' in myUserName:
+        elif (
+            "ㅤ" in myUserName
+            or "	" in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "͏͏­­­­­؜­" in myUserName
+            or "ᅟ" in myUserName
+            or "ᅟ" in myUserName
+            or "ᅠ" in myUserName
+            or "឵᠎᠎ " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "‎​​‌" in myUserName
+            or "‏" in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or " " in myUserName
+            or "　⁯⁭⁮⁣" in myUserName
+            or "　" in myUserName
+            or "⠀" in myUserName
+            or "ㅤ" in myUserName
+            or "﻿" in myUserName
+            or "ﾠ" in myUserName
+            or "𝅙" in myUserName
+        ):
             myUserName = ""
             UserNameSet = False
             msg = QMessageBox()  # makes message box
@@ -1147,7 +1204,8 @@ class Ui_Liscord(object):
                         msg.setWindowTitle("Target")  # menu title
                         # window text
                         msg.setText(
-                            "Invalid Target ipv4 Must be numbers only no letters")
+                            "Invalid Target ipv4 Must be numbers only no letters"
+                        )
                         # shows ! mark when help window opened
                         msg.setIcon(QMessageBox.Critical)
                         x = msg.exec_()  # activates message box
@@ -1165,12 +1223,22 @@ class Ui_Liscord(object):
                 msg.setIcon(QMessageBox.Critical)
                 x = msg.exec_()  # activates message box
             elif error == False:
-                print("Target IP = " + "(" + str(Target) +
-                      ") IP type = " + str(TargetType))
+                print(
+                    "Target IP = "
+                    + "("
+                    + str(Target)
+                    + ") IP type = "
+                    + str(TargetType)
+                )
                 msg = QMessageBox()  # makes message box
                 msg.setWindowTitle("Target")  # menu title
-                msg.setText("Your Target IP is " + "(" + str(Target) +
-                            ") IP type = " + str(TargetType))  # window text
+                msg.setText(
+                    "Your Target IP is "
+                    + "("
+                    + str(Target)
+                    + ") IP type = "
+                    + str(TargetType)
+                )  # window text
                 # shows ! mark when help window opened
                 msg.setIcon(QMessageBox.Information)
                 x = msg.exec_()  # activates message box
@@ -1183,7 +1251,9 @@ class Ui_Liscord(object):
         # display help message
         msg = QMessageBox()  # makes message box
         msg.setWindowTitle("Help Menu")  # help menu title
-        msg.setText("1.Enter your username and click enter\n2.Set your ip for host and your ip and target IP to connect to a host (works on both on network and off network for connecting off network use the other computers public IP address and to host use private ip) you can get private ip from typing ipconfig in cmd and public from searching on google 'What is my ip' \n3.Press host to host a chat and connect to connect to a host\n4.Once connected you can use the chat, voice call and screenshare\nYou can hover over buttons to get more info\nIf the program breaks just restart it- normally breaks when screensharing or calling more than once")  # help window text
+        msg.setText(
+            "1.Enter your username and click enter\n2.Set your ip for host and your ip and target IP to connect to a host (works on both on network and off network for connecting off network use the other computers public IP address and to host use private ip) you can get private ip from typing ipconfig in cmd and public from searching on google 'What is my ip' \n3.Press host to host a chat and connect to connect to a host\n4.Once connected you can use the chat, voice call and screenshare\nYou can hover over buttons to get more info\nIf the program breaks just restart it- normally breaks when screensharing or calling more than once"
+        )  # help window text
         # shows question mark when help window opened
         msg.setIcon(QMessageBox.Question)
         x = msg.exec_()  # activates message box
@@ -1241,8 +1311,7 @@ class Ui_Liscord(object):
                         msg = QMessageBox()  # makes message box
                         msg.setWindowTitle("Target")  # menu title
                         # window text
-                        msg.setText(
-                            "Invalid IP Ipv4 Must be numbers only no letters")
+                        msg.setText("Invalid IP Ipv4 Must be numbers only no letters")
                         # shows ! mark when help window opened
                         msg.setIcon(QMessageBox.Critical)
                         x = msg.exec_()  # activates message box
@@ -1323,8 +1392,7 @@ class Ui_Liscord(object):
                         if ipCount == 5:
                             msg = QMessageBox()  # makes message box
                             msg.setWindowTitle("Connect")  # menu title
-                            msg.setText("Cant connect to " +
-                                        str(Target))  # window text
+                            msg.setText("Cant connect to " + str(Target))  # window text
                             # shows ! mark when window opened
                             msg.setIcon(QMessageBox.Critical)
                             x = msg.exec_()  # activates message box
@@ -1336,16 +1404,20 @@ class Ui_Liscord(object):
                     connectionError = False
                 else:
                     publicPartner = rsa.PublicKey.load_pkcs1(
-                        Client.recv(1024))  # receive partners encryption key
+                        Client.recv(1024)
+                    )  # receive partners encryption key
                     # send our encryption key
                     Client.send(publicKey.save_pkcs1("PEM"))
 
-                    Client.send(rsa.encrypt(str(myUserName).encode(
-                        "utf-8"), publicPartner))  # sends my username
+                    Client.send(
+                        rsa.encrypt(str(myUserName).encode("utf-8"), publicPartner)
+                    )  # sends my username
                     HostUsername = rsa.decrypt(Client.recv(1024), privateKey).decode(
-                        "utf-8")  # gets other persons username
-                    fullText = str(fullText) + "\nCONNECTED WITH " + \
-                        str(HostUsername)  # sets full text of the chat
+                        "utf-8"
+                    )  # gets other persons username
+                    fullText = (
+                        str(fullText) + "\nCONNECTED WITH " + str(HostUsername)
+                    )  # sets full text of the chat
                     T.sleep(1)
                     print("connected with " + str(HostUsername))
                     self.chatBox.setText(fullText)  # set text as full text
@@ -1371,13 +1443,13 @@ class Ui_Liscord(object):
             try:
                 if Connected == False:
                     break
-                message = rsa.decrypt(Client.recv(
-                    1024), privateKey).decode("utf-8")
+                message = rsa.decrypt(Client.recv(1024), privateKey).decode("utf-8")
                 print("message received-conn")
                 if message == "!LEAVINGTHECHAT!":
                     print(str(HostUsername) + " Has Left The Chat")
-                    fullText = fullText + "\n" + \
-                        str(HostUsername) + " Has Left the chat"
+                    fullText = (
+                        fullText + "\n" + str(HostUsername) + " Has Left the chat"
+                    )
                     Hosting = False
                     connectingToHost = False
                     Connected = False
@@ -1391,8 +1463,7 @@ class Ui_Liscord(object):
                     else:
                         receiver = StreamingServer(IP, 9999)
                         print("starting port 9999")
-                    screenShareThread = threading.Thread(
-                        target=receiver.start_server)
+                    screenShareThread = threading.Thread(target=receiver.start_server)
                     screenShareThread.start()
                     otherPersonStreaming = True
                 elif message == "!STOP_SHARE_SCREEN!":
@@ -1402,7 +1473,9 @@ class Ui_Liscord(object):
                     sendButtonClicked = True  # update textbox
                     try:
                         receiver.stop_server()  # stop other person from streaming
-                        otherPersonStreaming = False  # set other person streaming to false
+                        otherPersonStreaming = (
+                            False  # set other person streaming to false
+                        )
                     except:
                         print("ERROR CANT STOP")
                 elif message == "!INCOMING_CALL!":
@@ -1412,19 +1485,19 @@ class Ui_Liscord(object):
                 elif message == "!JOINING_CALL!":
                     audioRecver1 = AudioReceiver(IP, 15567)
                     audiorecverThread1 = threading.Thread(
-                        target=audioRecver1.start_server)
+                        target=audioRecver1.start_server
+                    )
                     audioSend1 = AudioSender(IP, 15568)
-                    audioSendThread1 = threading.Thread(
-                        target=audioSend1.start_stream)
+                    audioSendThread1 = threading.Thread(target=audioSend1.start_stream)
 
                     audiorecverThread1.start()
                     audioSendThread1.start()
                     inCall = True
                 else:
-                    print("\n" + str(HostUsername) + "->" +
-                          str(message))  # send message to textbox
-                    fullText = fullText + "\n" + \
-                        str(HostUsername) + "->" + str(message)
+                    print(
+                        "\n" + str(HostUsername) + "->" + str(message)
+                    )  # send message to textbox
+                    fullText = fullText + "\n" + str(HostUsername) + "->" + str(message)
                     print("recv2 send true")
                     sendButtonClicked = True
             except:
@@ -1441,10 +1514,8 @@ class Ui_Liscord(object):
                 print("Sending ClientSide")
                 message = str(self.textBox.text())
 
-                Client.send(rsa.encrypt(
-                    message.encode("utf-8"), publicPartner))
-                fullText = fullText + "\n" + \
-                    str(myUserName) + "->" + str(message)
+                Client.send(rsa.encrypt(message.encode("utf-8"), publicPartner))
+                fullText = fullText + "\n" + str(myUserName) + "->" + str(message)
                 print("setting Text")
                 sendButtonClicked2 = False
             else:
@@ -1459,8 +1530,7 @@ def main():
     Liscord = QtWidgets.QMainWindow()  # makes main window
     fullIconDirectory = directory + "\\LiscordFlat.png"
     print(fullIconDirectory)
-    Liscord.setWindowIcon(QtGui.QIcon("LiscordFlat.png")
-                          )  # sets liscord app icon
+    Liscord.setWindowIcon(QtGui.QIcon("LiscordFlat.png"))  # sets liscord app icon
     ui = Ui_Liscord()  # sets ui to Liscords ui
     ui.setupUi(Liscord)  # sets up ui
     Liscord.show()  # shows main window
