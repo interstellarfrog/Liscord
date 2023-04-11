@@ -1,6 +1,8 @@
 # Liscord
 Chat App Made In Python For Same Network Communication or Port Forwarding
 
+![ftCdSkbjBb](https://user-images.githubusercontent.com/119659110/231225541-d76a7c7b-2a49-46e0-8e8f-7750172fb486.png)
+
 # Disclaimer
 
 # This Code Is Really Really Bad Nearly Unreadable
@@ -8,6 +10,7 @@ Chat App Made In Python For Same Network Communication or Port Forwarding
 I am not planning to fix this or work on this project at all
 
 # I AM NOT RESPONSIBLE IF ANYTHING BAD HAPPENS
+
 
 This was Made as a first year college project for computing science Do not expect it to work
 Without errors and I would not use this for anything important as im not sure how secure the
