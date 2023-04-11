@@ -10,7 +10,12 @@ SOFTWARE.
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-import sys, os, requests, threading, socket, rsa
+import sys
+import os
+import requests
+import threading
+import socket
+import rsa
 
 #IMPORTANT! You need pillow package for screenshare
 
