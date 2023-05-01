@@ -1,7 +1,17 @@
 # Liscord
 Chat App Made In Python For Same Network Communication or Port Forwarding
 
+Running On Windows
+
 ![ftCdSkbjBb](https://user-images.githubusercontent.com/119659110/231225541-d76a7c7b-2a49-46e0-8e8f-7750172fb486.png)
+
+
+Running On Arch Linux - You Have To Install Tkinter - sudo pacman -S tk
+
+![Screenshot 2023-05-01 123702](https://user-images.githubusercontent.com/119659110/235446709-a6fb013e-ca90-4cd6-a4a6-4b1a40415e41.png)
+
+
+
 
 # Disclaimer
 
