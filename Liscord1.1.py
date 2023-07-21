@@ -34,7 +34,7 @@ otherPersonStreaming = False
 notJoining = False
 inCall = False
 directory = os.getcwd()
-publicKey, privateKey = rsa.newkeys(1024)
+publicKey, privateKey = rsa.newkeys(2048)
 publicPartner = None
 Target = ""
 
