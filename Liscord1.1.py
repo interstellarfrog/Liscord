@@ -923,7 +923,7 @@ class Ui_Liscord(object):
                         T.sleep(1)
                         conn.send(publicKey.save_pkcs1("PEM"))
                         publicPartner = rsa.PublicKey.load_pkcs1(
-                            conn.recv(1024))
+                            conn.recv(2048))
                         ClientUsername = rsa.decrypt(
                             conn.recv(1024), privateKey).decode("utf-8")
                         T.sleep(0.5)
@@ -950,7 +950,7 @@ class Ui_Liscord(object):
             try:
                 if Connected == False:
                     break
-                message = rsa.decrypt(conn.recv(1024), privateKey).decode(
+                message = rsa.decrypt(conn.recv(2048), privateKey).decode(
                     "utf-8")  # receive message decrpt and decode
                 if message == "!LEAVINGTHECHAT!":  # if leaving chat message received
                     fullText = str(fullText) + "\n" + \
@@ -1336,13 +1336,13 @@ class Ui_Liscord(object):
                     connectionError = False
                 else:
                     publicPartner = rsa.PublicKey.load_pkcs1(
-                        Client.recv(1024))  # receive partners encryption key
+                        Client.recv(2048))  # receive partners encryption key
                     # send our encryption key
                     Client.send(publicKey.save_pkcs1("PEM"))
 
                     Client.send(rsa.encrypt(str(myUserName).encode(
                         "utf-8"), publicPartner))  # sends my username
-                    HostUsername = rsa.decrypt(Client.recv(1024), privateKey).decode(
+                    HostUsername = rsa.decrypt(Client.recv(2048), privateKey).decode(
                         "utf-8")  # gets other persons username
                     fullText = str(fullText) + "\nCONNECTED WITH " + \
                         str(HostUsername)  # sets full text of the chat
@@ -1372,7 +1372,7 @@ class Ui_Liscord(object):
                 if Connected == False:
                     break
                 message = rsa.decrypt(Client.recv(
-                    1024), privateKey).decode("utf-8")
+                    2048), privateKey).decode("utf-8")
                 print("message received-conn")
                 if message == "!LEAVINGTHECHAT!":
                     print(str(HostUsername) + " Has Left The Chat")
